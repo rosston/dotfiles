@@ -1,0 +1,4 @@
+.netrwhist
+.nvimrc-rplugin~
+autoload/plug.vim
+plugged

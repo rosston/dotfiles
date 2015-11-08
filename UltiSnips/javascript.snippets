@@ -1,0 +1,51 @@
+# Modules {{{
+snippet reqname "require().name"
+require('${1:foo}').name
+endsnippet
+
+snippet fs "require('fs')"
+var fs = require('fs');
+endsnippet
+
+snippet rfs "fs.readFileSync()"
+fs.readFileSync(__dirname + '/${1:foo}.html', 'utf8')
+endsnippet
+# }}}
+
+
+# BDD {{{
+snippet desc "describe"
+describe('${1:description}', function() {
+    ${0}
+});
+endsnippet
+
+snippet it "it synchronous"
+it('${1:should do something}', function() {
+    ${0}
+});
+endsnippet
+# }}}
+
+
+# Test boilerplate {{{
+snippet testfile "test file boilerplate"
+/* eslint-disable no-unused-expressions */
+/* eslint-env mocha */
+
+'use strict';
+
+var chai = require('chai');
+var expect = chai.expect;
+endsnippet
+
+snippet sinon "sinon"
+var sinon = require('sinon');
+var sinonChai = require('sinon-chai');
+chai.use(sinonChai);
+endsnippet
+
+snippet proxy "proxyquireify"
+var proxyquire = require('proxyquireify')(require);
+endsnippet
+# }}}
