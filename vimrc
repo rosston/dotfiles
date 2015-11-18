@@ -154,13 +154,13 @@ endif
 
 " Shortcut mappings {{{
 " Remap old behavior of , (repeat last f, F, t, or T command in the opposite
-" direction) to <leader>F
-nnoremap <leader>F ,
+" direction) to <leader>,
+nnoremap <leader>, ,
 
 " Don't require the Shift key to form chords to enter ex mode.
 nnoremap ; :
-" Remap old behavior of ; (repeat last f, F, t, or T command) to <leader>f
-nnoremap <leader>f ;
+" Remap old behavior of ; (repeat last f, F, t, or T command) to <leader>;
+nnoremap <leader>; ;
 
 " Remap j and k to act as expected when used on long, wrapped, lines
 nnoremap j gj
