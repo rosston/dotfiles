@@ -151,11 +151,15 @@ endif
 
 
 " Shortcut mappings {{{
-" Since I never use the ; key anyway, this is a real optimization for almost
-" all Vim commands, as I don't have to press the Shift key to form chords to
-" enter ex mode.
+let mapleader=","
+" Remap old behavior of , (repeat last f, F, t, or T command in the opposite
+" direction) to <leader>F
+nnoremap <leader>F ,
+
+" Don't require the Shift key to form chords to enter ex mode.
 nnoremap ; :
-nnoremap <leader>; ;
+" Remap old behavior of ; (repeat last f, F, t, or T command) to <leader>f
+nnoremap <leader>f ;
 
 " Remap j and k to act as expected when used on long, wrapped, lines
 nnoremap j gj
@@ -168,7 +172,7 @@ nnoremap <silent> <leader>/ :nohlsearch<CR>
 nnoremap <silent> <leader>e :Explore<CR>
 
 " Launch Ack
-nnoremap <leader>f :Ack! ""<left>
+nnoremap <leader>ag :Ack! ""<left>
 " }}}
 
 
