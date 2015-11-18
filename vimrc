@@ -35,6 +35,8 @@ syntax on
 " Turn on omni completion
 set omnifunc=syntaxcomplete#Complete
 
+" Set ',' as mapleader
+let mapleader=","
 
 " Editing behaviour {{{
 set showmode                    " always show what mode we're currently editing in
@@ -151,7 +153,6 @@ endif
 
 
 " Shortcut mappings {{{
-let mapleader=","
 " Remap old behavior of , (repeat last f, F, t, or T command in the opposite
 " direction) to <leader>F
 nnoremap <leader>F ,
