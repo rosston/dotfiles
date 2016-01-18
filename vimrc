@@ -226,7 +226,7 @@ let g:ctrlp_max_files = 20000
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = {
     \ 'file': '\v[\/](\.DS_Store)$',
-    \ 'dir': '\v[\/](\.git|\.idea|bower_components|dist|node_modules|tmp|utilities\/deployment\/package\/content)$',
+    \ 'dir': '\v[\/](\.git|\.idea|bower_components|dist|legacy\/framework|node_modules|tmp|utilities\/deployment\/package\/content)$',
     \ }
 " }}}
 
