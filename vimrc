@@ -9,7 +9,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'bkad/CamelCaseMotion'
 Plug 'mileszs/ack.vim'
 Plug 'GertjanReynaert/cobalt2-vim-theme'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/deoplete.nvim'
 Plug 'mattn/emmet-vim', { 'for': 'html' }
 Plug 'Shougo/neocomplete.vim'
