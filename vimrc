@@ -223,6 +223,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3b5364 ctermbg=4
 " CtrlP settings {{{
 :nnoremap <C-k> :CtrlPBuffer<CR>
 let g:ctrlp_max_files = 20000
+let g:ctrlp_open_multiple_files = 'i'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = {
     \ 'file': '\v[\/](\.DS_Store)$',
