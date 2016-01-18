@@ -212,6 +212,11 @@ set autochdir
 " }}}
 
 
+" CamelCaseMotion settings {{{
+call camelcasemotion#CreateMotionMappings('<leader>')
+" }}}
+
+
 " vim-indent-guides settings {{{
 let g:indent_guides_guide_size = 1
 let g:indent_guides_auto_colors = 0
