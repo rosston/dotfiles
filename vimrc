@@ -166,6 +166,9 @@ nnoremap <leader>; ;
 nnoremap j gj
 nnoremap k gk
 
+" Allow quickly searching for the visually selected text
+vnoremap // y/<C-R>"<CR>
+
 " Clears the search register
 nnoremap <silent> <leader>/ :nohlsearch<CR>
 
