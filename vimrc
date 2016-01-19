@@ -179,6 +179,11 @@ nnoremap <silent> <leader>e :Explore<CR>
 nnoremap <leader>ag :Ack! ""<left>
 " }}}
 
+" filetype-specific settings {{{
+" Don't treat '-' as a word break character in the CSS language family
+autocmd FileType css,less,sass,scss setlocal iskeyword+=-
+" }}}
+
 
 " Strip trailing whitespace {{{
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
