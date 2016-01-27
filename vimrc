@@ -75,7 +75,12 @@ set mouse=a                     " enable using the mouse if terminal emulator
 set fileformats="unix,dos,mac"
 set wrap
 set textwidth=79
+
 set formatoptions=qrn1
+if v:version > 703 || v:version == 703 && has("patch541")
+    set formatoptions+=j " Delete comment character when joining commented lines
+endif
+
 set colorcolumn=80
 
 set nrformats=                  " make <C-a> and <C-x> play well with
