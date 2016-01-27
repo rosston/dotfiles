@@ -76,10 +76,7 @@ set fileformats="unix,dos,mac"
 set wrap
 set textwidth=79
 
-set formatoptions=qrn1
-if v:version > 703 || v:version == 703 && has("patch541")
-    set formatoptions+=j " Delete comment character when joining commented lines
-endif
+set formatoptions=qrn1j
 
 set colorcolumn=80
 
@@ -117,11 +114,9 @@ set switchbuf=useopen           " reveal already opened files from the
                                 " buffers
 set history=1000                " remember more commands and search history
 set undolevels=1000             " use many muchos levels of undo
-if v:version >= 730
-    set undofile                " keep a persistent backup file
-    set undodir=~/.vim/tmp/.undo,~/tmp,/tmp
+set undofile                " keep a persistent backup file
+set undodir=~/.vim/tmp/.undo,~/tmp,/tmp
                                 " store undo files in one of these directories
-endif
 set backupdir=~/.vim/tmp/backup/,~/tmp,/tmp
                                 " store backup files in one of these
                                 " directories
@@ -138,11 +133,10 @@ set showcmd                     " show (partial) command in the last line of the
                                 "    this also shows visual selection info
 set nomodeline                  " disable mode lines (security measure)
 set cursorline                  " underline the current line, for quick orientation
+
 " save and restore cursor position when switching buffers
-if v:version >= 700
-  au BufLeave * let b:winview = winsaveview()
-  au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
-endif
+au BufLeave * let b:winview = winsaveview()
+au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
 " }}}
 
 
