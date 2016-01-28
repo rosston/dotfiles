@@ -19,6 +19,7 @@ Plug 'tpope/vim-abolish'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-capslock'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -26,6 +27,7 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'tpope/vim-obsession'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 
 call plug#end()
 filetype plugin indent on       " enable detection, plugins and indenting in one step
