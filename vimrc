@@ -222,6 +222,13 @@ set autochdir
 " }}}
 
 
+" vim-surround settings {{{
+" Make 'o' work to surround text with nothing. Then use 'S' in vim-surround to
+" wrap the text in new lines.
+let b:surround_111 = "\r"
+" }}}
+
+
 " CamelCaseMotion settings {{{
 call camelcasemotion#CreateMotionMappings('<leader>')
 " }}}
