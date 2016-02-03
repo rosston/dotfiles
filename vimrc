@@ -21,6 +21,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-capslock'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
