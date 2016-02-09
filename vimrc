@@ -9,7 +9,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'bkad/CamelCaseMotion'
 Plug 'mileszs/ack.vim'
 Plug 'GertjanReynaert/cobalt2-vim-theme'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mattn/emmet-vim', { 'for': 'html' }
 Plug 'scrooloose/syntastic'
 Plug 'SirVer/ultisnips'
@@ -30,12 +29,15 @@ Plug 'tpope/vim-unimpaired'
 
 " Vim only (not Neovim)
 if !has('nvim')
+    Plug 'ctrlpvim/ctrlp.vim'
     Plug 'Shougo/neocomplete.vim'
 endif
 
 " Neovim only
 if has('nvim')
     Plug 'Shougo/deoplete.nvim'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
 endif
 
 call plug#end()
@@ -180,7 +182,7 @@ nnoremap <leader>ag :Ack! ""<left>
 
 " Neovim-specific mappings {{{
 if has('nvim')
-    :tnoremap <Esc><Esc> <C-\><C-n>
+    :tnoremap <leader><Esc> <C-\><C-n>
 endif
 " }}}
 
@@ -247,7 +249,6 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3b5364 ctermbg=4
 
 
 " CtrlP settings {{{
-:nnoremap <C-k> :CtrlPBuffer<CR>
 let g:ctrlp_max_files = 20000
 let g:ctrlp_open_multiple_files = 'i'
 let g:ctrlp_show_hidden = 1
@@ -255,6 +256,11 @@ let g:ctrlp_custom_ignore = {
     \ 'file': '\v[\/](\.DS_Store)$',
     \ 'dir': '\v[\/](\.git|\.idea|bower_components|dist|legacy\/framework|node_modules|tmp|utilities\/deployment\/package\/content)$',
     \ }
+" }}}
+
+
+" FZF settings {{{
+let $FZF_DEFAULT_COMMAND = 'find . ! -wholename "*.DS_Store" ! -wholename "*.git*" ! -wholename "*.idea*" ! -wholename "*bower_components*" ! -wholename "*client/dist*" ! -wholename "*legacy/framework*" ! -wholename "*node_modules*" ! -wholename "*utilities/deployment/package/content*"'
 " }}}
 
 
