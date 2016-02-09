@@ -47,8 +47,8 @@ syntax on
 " Turn on omni completion
 set omnifunc=syntaxcomplete#Complete
 
-" Set ',' as mapleader
-let mapleader=","
+" Set space as mapleader
+let mapleader="\<Space>"
 
 " Editing behaviour {{{
 set showmode                    " always show what mode we're currently editing in
@@ -157,10 +157,6 @@ au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
 " inserting a \v before any string you search for.
 nnoremap / /\v
 vnoremap / /\v
-
-" Remap old behavior of , (repeat last f, F, t, or T command in the opposite
-" direction) to <leader>,
-nnoremap <leader>, ,
 
 " Don't require the Shift key to form chords to enter ex mode.
 nnoremap ; :
