@@ -153,12 +153,6 @@ au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
 
 
 " Shortcut mappings {{{
-" Toggle show/hide invisible chars
-nnoremap <leader>i :set list!<cr>
-
-" Toggle line numbers
-nnoremap <leader>N :setlocal number!<cr>
-
 " Fix Vim’s horribly broken default regex “handling” by automatically
 " inserting a \v before any string you search for.
 nnoremap / /\v
@@ -182,9 +176,6 @@ vnoremap // y/<C-R>"<CR>
 
 " Clears the search register
 nnoremap <silent> <leader>/ :nohlsearch<CR>
-
-" Get into netrw easily
-nnoremap <silent> <leader>e :Explore<CR>
 
 " Launch Ack
 nnoremap <leader>ag :Ack! ""<left>
