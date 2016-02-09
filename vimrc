@@ -10,9 +10,7 @@ Plug 'bkad/CamelCaseMotion'
 Plug 'mileszs/ack.vim'
 Plug 'GertjanReynaert/cobalt2-vim-theme'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'Shougo/deoplete.nvim'
 Plug 'mattn/emmet-vim', { 'for': 'html' }
-Plug 'Shougo/neocomplete.vim'
 Plug 'scrooloose/syntastic'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-abolish'
@@ -29,6 +27,16 @@ Plug 'tpope/vim-obsession'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+
+" Vim only (not Neovim)
+if !has('nvim')
+    Plug 'Shougo/neocomplete.vim'
+endif
+
+" Neovim only
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim'
+endif
 
 call plug#end()
 filetype plugin indent on       " enable detection, plugins and indenting in one step
@@ -182,6 +190,14 @@ nnoremap <silent> <leader>e :Explore<CR>
 nnoremap <leader>ag :Ack! ""<left>
 " }}}
 
+
+" Neovim-specific mappings {{{
+if has('nvim')
+    :tnoremap <Esc><Esc> <C-\><C-n>
+endif
+" }}}
+
+
 " filetype-specific settings {{{
 " Don't treat '-' as a word break character in the CSS language family
 autocmd FileType css,less,sass,scss setlocal iskeyword+=-
@@ -257,6 +273,11 @@ let g:ctrlp_custom_ignore = {
 
 " neocomplete settings {{{
 let g:neocomplete#enable_at_startup = 1
+" }}}
+
+
+" deoplete settings {{{
+let g:deoplete#enable_at_startup = 1
 " }}}
 
 
