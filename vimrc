@@ -6,10 +6,15 @@ set nocompatible
 filetype off                    " force reloading *after* vim-plug loads
 call plug#begin('~/.vim/plugged')
 
-Plug 'bkad/CamelCaseMotion'
 Plug 'mileszs/ack.vim'
+Plug 'bkad/CamelCaseMotion'
 Plug 'GertjanReynaert/cobalt2-vim-theme'
+Plug 'ctrlpvim/ctrlp.vim', { 'on': [] }
+Plug 'Shougo/deoplete.nvim', { 'on': [] }
 Plug 'mattn/emmet-vim', { 'for': 'html' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all', 'on': [] }
+Plug 'junegunn/fzf.vim', { 'on': [] }
+Plug 'Shougo/neocomplete.vim', { 'on': [] }
 Plug 'scrooloose/syntastic'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-abolish'
@@ -27,20 +32,21 @@ Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
+call plug#end()
+
+" Custom load some plugins
 " Vim only (not Neovim)
 if !has('nvim')
-    Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'Shougo/neocomplete.vim'
+    call plug#load('ctrlp.vim', 'neocomplete.vim')
+    autocmd InsertEnter * NeoCompleteEnable
 endif
 
 " Neovim only
 if has('nvim')
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-    Plug 'junegunn/fzf.vim'
+    call plug#load('deoplete.nvim', 'fzf', 'fzf.vim')
+    autocmd InsertEnter * DeopleteEnable
 endif
 
-call plug#end()
 filetype plugin indent on       " enable detection, plugins and indenting in one step
 
 " Turn on syntax highlighting
@@ -261,16 +267,6 @@ let g:ctrlp_custom_ignore = {
 
 " FZF settings {{{
 let $FZF_DEFAULT_COMMAND = 'find . ! -wholename "*.DS_Store" ! -wholename "*.git*" ! -wholename "*.idea*" ! -wholename "*bower_components*" ! -wholename "*client/dist*" ! -wholename "*legacy/framework*" ! -wholename "*node_modules*" ! -wholename "*utilities/deployment/package/content*"'
-" }}}
-
-
-" neocomplete settings {{{
-let g:neocomplete#enable_at_startup = 1
-" }}}
-
-
-" deoplete settings {{{
-let g:deoplete#enable_at_startup = 1
 " }}}
 
 
