@@ -204,11 +204,15 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 " }}}
 
 " Style/theme settings {{{
+" Enable true color in the terminal if we're using a version of Vim that
+" supports it (i.e., ZyX-i's fork).
 if has("termtruecolor")
     let &t_8f="\e[38;2;%ld;%ld;%ldm"
     let &t_8b="\e[48;2;%ld;%ld;%ldm"
     set guicolors
 endif
+" Or just enable true color in Neovim :)
+let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 
 if has('gui_running')
   set guifont=Source\ Code\ Pro:h13
@@ -222,9 +226,13 @@ colorscheme cobalt2
 " make the wrap guide less crazy than pure black
 highlight ColorColumn ctermbg=lightgrey guibg=#3b5364
 
-" change cursor shape in iTerm
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" change cursor shape in iTerm when using Vim
+if !has('nvim')
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+" Or just let Neovim figure out the cursor shape
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 " }}}
 
 
