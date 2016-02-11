@@ -98,7 +98,7 @@ set textwidth=79
 
 set formatoptions=qrn1j
 
-set colorcolumn=80
+set colorcolumn=+1
 
 set nrformats=                  " make <C-a> and <C-x> play well with
                                 "    zero-padded numbers (i.e. don't consider
