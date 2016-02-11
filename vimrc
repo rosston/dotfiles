@@ -274,9 +274,9 @@ let g:ctrlp_custom_ignore = {
 
 
 " FZF settings {{{
-let $FZF_DEFAULT_COMMAND = 'find . ! -wholename "*.DS_Store" ! -wholename "*.git*" ! -wholename "*.idea*" ! -wholename "*bower_components*" ! -wholename "*client/dist*" ! -wholename "*legacy/framework*" ! -wholename "*node_modules*" ! -wholename "*utilities/deployment/package/content*"'
+let $FZF_DEFAULT_COMMAND = 'find . ! -wholename "*.DS_Store" ! -wholename "*.git*" ! -wholename "*.idea*" ! -wholename "*bower_components*" ! -wholename "*client/dist*" ! -wholename "*legacy/framework*" ! -wholename "*node_modules*" ! -wholename "*utilities/deployment/package/content*" ! -wholename "*legacy/protected/extensions*"'
 if executable('ag')
-    let $FZF_DEFAULT_COMMAND = 'ag -g "" --ignore "bower_components" --ignore "legacy/framework"'
+    let $FZF_DEFAULT_COMMAND = 'ag -g "" --ignore "bower_components" --ignore "legacy/framework" --ignore "legacy/protected/extensions"'
 endif
 " }}}
 
