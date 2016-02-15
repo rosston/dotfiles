@@ -181,6 +181,9 @@ vnoremap // y/<C-R>"<CR>
 " Clears the search register
 nnoremap <silent> <leader>/ :nohlsearch<CR>
 
+" Toggle relative line numbers
+nnoremap <silent> <leader>rel :set relativenumber!<cr>
+
 " Launch Ack
 nnoremap <leader>ag :Ack! ""<left>
 " }}}
