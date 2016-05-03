@@ -6,11 +6,15 @@ set nocompatible
 filetype off                    " force reloading *after* vim-plug loads
 call plug#begin('~/.vim/plugged')
 
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+
 Plug 'mileszs/ack.vim'
 Plug 'bkad/CamelCaseMotion'
 Plug 'GertjanReynaert/cobalt2-vim-theme'
 Plug 'ctrlpvim/ctrlp.vim', { 'on': [] }
-Plug 'Shougo/deoplete.nvim', { 'on': [] }
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote'), 'on': [] }
 Plug 'mattn/emmet-vim', { 'for': 'html' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all', 'on': [] }
 Plug 'junegunn/fzf.vim', { 'on': [] }
