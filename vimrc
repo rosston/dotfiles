@@ -35,6 +35,7 @@ Plug 'tpope/vim-obsession'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'jreybert/vimagit'
 
 call plug#end()
 
