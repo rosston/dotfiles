@@ -44,7 +44,7 @@ endif
 " Neovim only
 if has('nvim')
     call plug#load('deoplete.nvim', 'fzf', 'fzf.vim')
-    autocmd InsertEnter * DeopleteEnable
+    autocmd InsertEnter * call deoplete#enable()
 endif
 
 filetype plugin indent on       " enable detection, plugins and indenting in one step
