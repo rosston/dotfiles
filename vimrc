@@ -184,6 +184,10 @@ nnoremap k gk
 " Remap Y to act like C and D
 noremap Y y$
 
+" Allow repeated indent shifts
+vnoremap < <gv
+vnoremap > >gv
+
 " Allow quickly searching for the visually selected text
 vnoremap // y/<C-R>"<CR>
 
