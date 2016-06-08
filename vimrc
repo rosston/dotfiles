@@ -181,6 +181,9 @@ nnoremap <leader>; ;
 nnoremap j gj
 nnoremap k gk
 
+" Remap Y to act like C and D
+noremap Y y$
+
 " Allow quickly searching for the visually selected text
 vnoremap // y/<C-R>"<CR>
 
