@@ -168,7 +168,7 @@ au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
 
 
 " Shortcut mappings {{{
-source ./visual-at.vim
+source ~/.vim/visual-at.vim
 
 " Fix Vim’s horribly broken default regex “handling” by automatically
 " inserting a \v before any string you search for.
