@@ -1,4 +1,5 @@
 .netrwhist
 .init.vim-rplugin~
 .vim/autoload/plug.vim
+*.local
 plugged
