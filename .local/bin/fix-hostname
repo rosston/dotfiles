@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Fix the hostname everywhere
+sudo scutil --set ComputerName "$1"
+sudo scutil --set HostName "$1"
+sudo scutil --set LocalHostName "$1"
+
+# Restart bash so that the prompt looks right
+exec bash

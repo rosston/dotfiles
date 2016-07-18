@@ -1,0 +1,9 @@
+#!/bin/bash
+
+interrupt_handler() {
+    open ~/Applications/shrink_cursor.app
+}
+trap interrupt_handler SIGINT
+
+open ~/Applications/enlarge_cursor.app
+caffeinate -d

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+NO_COLOR_FORMAT="%h %an %s"
+COLOR_FORMAT="%Cred%h %Cgreen%an %Cblue%s"
+
+FORMAT=$COLOR_FORMAT
+for arg in "$@"; do
+    case $arg in
+        "--no-color"|"--color=never")
+            FORMAT=$NO_COLOR_FORMAT
+            ;;
+        *)
+            ;;
+    esac
+done
+
+git log --pretty=format:"$FORMAT" "$@"

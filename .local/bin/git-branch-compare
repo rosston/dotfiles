@@ -1,0 +1,13 @@
+#!/bin/sh
+
+OLD_BRANCH="$1"
+NEW_BRANCH="$2"
+
+COMMITS_AHEAD=`git log --oneline "$OLD_BRANCH".."$NEW_BRANCH" | wc -l`
+COMMITS_BEHIND=`git log --oneline "$NEW_BRANCH".."$OLD_BRANCH" | wc -l`
+
+echo ""
+echo "$NEW_BRANCH:"
+echo "$COMMITS_AHEAD commits ahead of $OLD_BRANCH"
+echo "$COMMITS_BEHIND commits behind $OLD_BRANCH"
+echo ""

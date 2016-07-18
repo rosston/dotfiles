@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+
+left_path="$1"
+right_path="$2"
+
+left_basename=`basename "$left_path"`
+right_basename=`basename "$right_path"`
+
+left_filename="${left_basename}-po_diff_left"
+right_filename="${right_basename}-po_diff_right"
+
+left_tmp_path=`mktemp -t "$left_filename"`
+right_tmp_path=`mktemp -t "$right_filename"`
+
+better_left_tmp_path="${left_tmp_path}.po"
+better_right_tmp_path="${right_tmp_path}.po"
+
+msgcat -o "$better_left_tmp_path" --no-wrap --sort-output "$left_path"
+msgcat -o "$better_right_tmp_path" --no-wrap --sort-output "$right_path"
+
+vimdiff "$better_left_tmp_path" "$better_right_tmp_path"
+
+rm "$left_tmp_path" "$right_tmp_path" "$better_left_tmp_path" "$better_right_tmp_path"
