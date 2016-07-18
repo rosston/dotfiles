@@ -1,0 +1,63 @@
+# Your snippets
+#
+# Atom snippets allow you to enter a simple prefix in the editor and hit tab to
+# expand the prefix into a larger code block with templated values.
+#
+# You can create a new snippet in this file by typing "snip" and then hitting
+# tab.
+#
+# An example CoffeeScript snippet to expand log to console.log:
+#
+# '.source.coffee':
+#   'Console log':
+#     prefix: 'log'
+#     body: 'console.log $1'
+#
+
+'.source.js':
+  # Modules
+  'require().name':
+    prefix: 'reqname',
+    body: 'require(\'${1:foo}\').name'
+  'require(\'fs\')':
+    prefix: 'fs',
+    body: 'var fs = require(\'fs\');'
+  'fs.readFileSync()':
+    prefix: 'rfs',
+    body: 'fs.readFileSync(__dirname + \'/${1:foo}.html\', \'utf8\')'
+  # Functions
+  'anonymous function':
+    prefix: 'f'
+    body: 'function(${1:arguments}) {${0}}'
+  'immediately-invoked function expression':
+    prefix: 'iife'
+    body: '''
+    (function(${1:arguments}) {
+    \t${0}
+    }(${2}));
+    '''
+  # BDD
+  'describe':
+    prefix: 'desc'
+    body: '''
+    describe('${1:description}', function() {
+    \t${0}
+    });
+    '''
+  'it synchronous':
+    prefix: 'it'
+    body: '''
+    it('${1:should do something}', function() {
+    \t${0}
+    });
+    '''
+  # Test boilerplate
+  'test file boilerplate':
+    prefix: 'testfile',
+    body: '/* eslint-disable no-unused-expressions */\n/* eslint-env mocha */\n\n\'use strict\';\n\nvar chai = require(\'chai\');\nvar expect = chai.expect;'
+  'sinon':
+    prefix: 'sinon',
+    body: 'var sinon = require(\'sinon\');\nvar sinonChai = require(\'sinon-chai\');\nchai.use(sinonChai);'
+  'proxyquireify':
+    prefix: 'proxy',
+    body: 'var proxyquire = require(\'proxyquireify\')(require);'

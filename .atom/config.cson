@@ -1,0 +1,78 @@
+"*":
+  "atom-ternjs":
+    docs: false
+  "autocomplete-plus": {}
+  "base16-syntax":
+    scheme: "Pop"
+  core:
+    projectHome: "/Users/ross/Code"
+    themes: [
+      "one-dark-ui"
+      "cobalt2-syntax"
+    ]
+  docblockr: {}
+  editor:
+    fontFamily: "Source Code Pro"
+    invisibles: {}
+    lineHeight: 1.4
+    nonWordCharacters: "/\\()\"':,.;<>~!#%^&*|+=[]{}`?-"
+    showIndentGuide: true
+    softWrap: true
+    softWrapAtPreferredLineLength: true
+    tabLength: 4
+  emmet: {}
+  "exception-reporting":
+    userId: "8a401373-8223-9b89-cde9-6f0e2b6d86e4"
+  "file-icons":
+    coloured: false
+    onChanges: true
+  "git-blame": {}
+  "highlight-selected":
+    hideHighlightOnSelectedWord: true
+    onlyHighlightWholeWords: true
+  "language-babel":
+    suppressTranspileOnSaveMessages: true
+  linter:
+    lintOnChange: true
+    lintOnFly: false
+    showErrorInline: false
+    showErrorTabProject: false
+    statusBar: "Show all errors"
+  "linter-eslint":
+    disableWhenNoEslintrcFileInPath: true
+    globalNodePath: "/Users/ross/.nodenv/versions/4.3.0"
+    showRuleIdInMessage: true
+    useGlobalEslint: true
+  metrics:
+    userId: "42927ce1dd05663b96c8a2269c714cc32c716667"
+  "one-dark-ui": {}
+  react: {}
+  "release-notes":
+    viewedVersion: "0.94.0"
+  "save-session":
+    dataSaveFolder: "/Users/ross/.atom/packages/save-session/projects"
+    project: "/Users/ross/Sites/awt"
+    restoreWindow: false
+  "tree-view":
+    showOnRightSide: true
+  welcome:
+    showOnStartup: false
+  "white-cursor": {}
+  whitespace:
+    ignoreWhitespaceOnCurrentLine: false
+".babel.regexp.source":
+  editor:
+    nonWordCharacters: "/\\()\"':,.;<>~!#%^&*|+=[]{}`?-"
+".coffee.source":
+  editor:
+    nonWordCharacters: "/\\()\"':,.;<>~!#%^&*|+=[]{}`?-"
+    tabLength: 2
+".js.jsx.source":
+  editor:
+    nonWordCharacters: "/\\()\"':,.;<>~!#%^&*|+=[]{}`?-"
+".json.source":
+  editor:
+    nonWordCharacters: "/\\()\"':,.;<>~!#%^&*|+=[]{}`?-"
+".litcoffee.source":
+  editor:
+    nonWordCharacters: "/\\()\"':,.;<>~!#%^&*|+=[]{}`?-"

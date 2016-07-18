@@ -1,0 +1,47 @@
+# Your keymap
+#
+# Atom keymaps work similarly to stylesheets. Just as stylesheets use selectors
+# to apply styles to elements, Atom keymaps use selectors to associate
+# keystrokes with events in specific contexts.
+#
+# You can create a new keybinding in this file by typing "key" and then hitting
+# tab.
+#
+# Here's an example taken from Atom's built-in keymap:
+#
+# 'atom-text-editor':
+#   'enter': 'editor:newline'
+#
+# 'atom-workspace':
+#   'ctrl-P': 'core:move-up'
+#   'ctrl-p': 'core:move-down'
+#
+
+# Override Emmet when trying to use autocomplete
+'atom-text-editor[data-grammar="text html basic"]:not([mini]).autocomplete-active, atom-text-editor[data-grammar~="css"]:not([mini]).autocomplete-active':
+  'tab': 'autocomplete-plus:confirm'
+
+# Override Emmet when toggling comments
+'.platform-darwin atom-workspace atom-text-editor:not([mini])':
+  'cmd-/': 'editor:toggle-line-comments'
+
+# Override Emmet when trying to select to subword boundaries
+'atom-workspace atom-text-editor:not([mini])':
+  'ctrl-alt-left': 'editor:move-to-previous-subword-boundary'
+  'ctrl-alt-right': 'editor:move-to-next-subword-boundary'
+
+# Override Emmet when using line-jumper
+'atom-text-editor:not([mini])':
+  'alt-up': 'line-jumper:move-up'
+  'alt-down': 'line-jumper:move-down'
+  'alt-shift-up': 'line-jumper:select-up'
+  'alt-shift-down': 'line-jumper:select-down'
+
+'atom-workspace':
+  # Add shortcut to convert to "param"-case
+  'cmd-k cmd-p': 'change-case:param'
+  # Add shortcut to rename a file
+  'cmd-k cmd-r': 'tree-view:rename'
+
+'atom-text-editor.vim-mode:not(.insert-mode)':
+  ';': 'ex-mode:open'
