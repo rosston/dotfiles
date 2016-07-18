@@ -11,7 +11,7 @@ if exists(':Files')
     endfun
 
     command! Jira call fzf#run({
-        \ 'source': 'jira-list',
+        \ 'source': 'gluejira my-issues',
         \ 'sink*': function('<SID>jira_list_handler'),
         \ 'window': 'belowright 10new'})
 
