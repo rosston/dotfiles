@@ -1,0 +1,21 @@
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    branch-compare = !~/bin/git-branch-compare
+    nicelog = !~/bin/git-nicelog
+[color]
+    ui = auto
+[credential]
+    helper = osxkeychain
+[mergetool]
+    keepBackup = true
+[push]
+    default = simple
+[user]
+    name = rosston
+    email = ross.brandes@gmai"l.co"m
+[include]
+    path = .gitconfig.local
