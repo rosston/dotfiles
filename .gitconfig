@@ -4,8 +4,8 @@
     st = status
     br = branch
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-    branch-compare = !~/bin/git-branch-compare
-    nicelog = !~/bin/git-nicelog
+    branch-compare = !~/.local/bin/git-branch-compare
+    nicelog = !~/.local/bin/git-nicelog
 [color]
     ui = auto
 [credential]
