@@ -18,7 +18,7 @@ brew_prefix=$(brew --prefix)
 
 # PHP 5.5 path may occasionally need to be updated with output from
 # `brew --prefix homebrew/php/php55`
-export PATH="${brew_prefix}/opt/php55/bin:/opt/bin:/usr/local/bin:/usr/local/sbin:$PATH:/usr/local/mysql/bin:~/.local/bin:/Applications/VMware Fusion.app/Contents/Library"
+export PATH="${brew_prefix}/opt/php55/bin:/usr/local/bin:/usr/local/sbin:$PATH:/usr/local/mysql/bin:~/.local/bin:/Applications/VMware Fusion.app/Contents/Library"
 
 alias ag='ag -p ~/.config/ag/agignore'
 alias awake='caffeinate -d'
