@@ -243,11 +243,13 @@ endif
 
 colorscheme cobalt2
 
-" set a sane background color for current line
-:hi CursorLine guifg=NONE guibg=#1f4662 ctermfg=NONE
+if g:colors_name == 'cobalt2'
+    " set a sane background color for current line
+    :hi CursorLine guifg=NONE guibg=#1f4662 ctermfg=NONE
 
-" make the wrap guide less crazy than pure black
-highlight ColorColumn ctermbg=lightgrey guibg=#3b5364
+    " make the wrap guide less crazy than pure black
+    highlight ColorColumn ctermbg=lightgrey guibg=#3b5364
+endif
 
 " change cursor shape in iTerm when using Vim
 if !has('nvim')
