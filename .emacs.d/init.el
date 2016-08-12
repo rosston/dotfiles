@@ -41,7 +41,9 @@
                           (lambda () (my-send-string-to-terminal "\e]50;CursorShape=0\x7")))))
 
             (add-hook 'after-make-frame-functions (lambda (frame) (my-evil-terminal-cursor-change)))
-            (my-evil-terminal-cursor-change))
+            (my-evil-terminal-cursor-change)
+            (add-hook 'evil-insert-state-exit-hook
+                      (lambda () (soft-caps-lock-mode -1))))
   :ensure t
   :init (evil-mode t))
 (use-package evil-ediff
@@ -98,3 +100,17 @@
 (defun startup-magit ()
   (magit-status)
   (delete-other-windows))
+
+(defun soft-caps-capitalize ()
+  (upcase-region (1- (point)) (point)))
+
+(define-minor-mode soft-caps-lock-mode
+  "A mode for software capslock"
+  :init-value nil
+  :lighter " softcaps"
+  :keymap nil
+  (if soft-caps-lock-mode
+      (add-hook 'post-self-insert-hook 'soft-caps-capitalize nil t)
+    (remove-hook 'post-self-insert-hook 'soft-caps-capitalize t)))
+
+(global-set-key (kbd "C-l") 'soft-caps-lock-mode)
