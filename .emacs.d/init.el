@@ -101,6 +101,20 @@
   (magit-status)
   (delete-other-windows))
 
+; Shamelessly copied from https://github.com/jordonbiondo/.emacs.d
+(defun pbcopy(beg end)
+  "Stick the region on yer pastin' board."
+  (interactive "r")
+  (when (zerop (let ((inhibit-message t))
+                 (shell-command-on-region (region-beginning) (region-end) "pbcopy")))
+    (message "copied")))
+
+; Shamelessly copied from https://github.com/jordonbiondo/.emacs.d
+(defun pbpaste()
+  "Insert the contents from `pbpaste'. Won't trigger chords."
+  (interactive)
+  (insert (shell-command-to-string "pbpaste -Prefer txt")))
+
 (defun soft-caps-capitalize ()
   (upcase-region (1- (point)) (point)))
 
