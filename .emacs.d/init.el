@@ -104,6 +104,7 @@
 (defun soft-caps-capitalize ()
   (upcase-region (1- (point)) (point)))
 
+; Props to https://github.com/jordonbiondo for this mode and its backing function
 (define-minor-mode soft-caps-lock-mode
   "A mode for software capslock"
   :init-value nil
