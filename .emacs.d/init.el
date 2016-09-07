@@ -96,6 +96,8 @@
   :init (load-theme 'spacemacs-dark t nil))
 
 (setq column-number-mode t)
+(setq scroll-conservatively 9999
+      scroll-margin 20)
 
 (defun startup-magit ()
   (magit-status)
