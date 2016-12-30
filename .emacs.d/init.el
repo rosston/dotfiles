@@ -111,6 +111,15 @@
 (use-package nlinum
   :config (global-nlinum-mode t)
   :ensure t)
+(use-package racket-mode
+  :ensure t)
+(use-package rainbow-delimiters
+  :ensure t
+  :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+(use-package smartparens
+  :config (require 'smartparens-config)
+  :ensure t
+  :init (add-hook 'prog-mode-hook #'smartparens-mode))
 (use-package smex
   :bind ("M-x" . smex)
   :ensure t)
