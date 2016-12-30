@@ -25,7 +25,7 @@ alias awake='caffeinate -d'
 alias cls='clear && echo -en "\e[3J"'
 alias embiggen='printf "\e[8;40;100t"'
 alias ggrep='git grep --break --heading -n'
-alias magit='emacs -f startup-magit'
+alias magit='emacs -nw -f startup-magit'
 alias subl='subl -n'
 
 
