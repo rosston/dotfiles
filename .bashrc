@@ -28,6 +28,7 @@ alias ggrep='git grep --break --heading -n'
 alias magit='emacs -nw -f startup-magit'
 alias subl='subl -n'
 
+export FZF_DEFAULT_COMMAND='ag --hidden -g "" --ignore ".git/" --ignore "bower_components" --ignore "legacy/framework" --ignore "legacy/protected/extensions"'
 
 if [ -f "${brew_prefix}/share/bash-completion/bash_completion" ]; then
     . "${brew_prefix}/share/bash-completion/bash_completion"

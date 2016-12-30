@@ -30,6 +30,16 @@
   :bind (:map evil-normal-state-map
               (";" . evil-ex))
   :config (progn
+            (use-package evil-leader
+              :config (progn
+                        (evil-leader/set-leader "<SPC>")
+                        (evil-leader/set-key
+                          "<SPC>" 'fzf
+                          "ls" 'ido-switch-buffer))
+              :ensure t
+              :init (global-evil-leader-mode))
+            (setq normal-state-cursor-string "\e]50;CursorShape=0\x7")
+
             (defun my-send-string-to-terminal (string)
               (unless (display-graphic-p) (send-string-to-terminal string)))
 
@@ -38,15 +48,21 @@
                 (add-hook 'evil-insert-state-entry-hook
                           (lambda () (my-send-string-to-terminal "\e]50;CursorShape=1\x7")))
                 (add-hook 'evil-insert-state-exit-hook
-                          (lambda () (my-send-string-to-terminal "\e]50;CursorShape=0\x7")))))
+                          (lambda () (my-send-string-to-terminal normal-state-cursor-string)))))
+
+            (defun my-make-cursor-normal (process-name msg)
+              (my-send-string-to-terminal normal-state-cursor-string))
 
             (add-hook 'after-make-frame-functions (lambda (frame) (my-evil-terminal-cursor-change)))
+            (advice-add 'fzf/after-term-handle-exit :after #'my-make-cursor-normal)
             (my-evil-terminal-cursor-change)
             (add-hook 'evil-insert-state-exit-hook
                       (lambda () (soft-caps-lock-mode -1))))
   :ensure t
   :init (evil-mode t))
 (use-package evil-ediff
+  :ensure t)
+(use-package fzf
   :ensure t)
 (use-package ido
   :config (progn
