@@ -26,6 +26,7 @@ alias cls='clear && echo -en "\e[3J"'
 alias embiggen='printf "\e[8;40;100t"'
 alias ggrep='git grep --break --heading -n'
 alias magit='emacs -nw -f startup-magit'
+alias prettyjson='python -m json.tool'
 alias subl='subl -n'
 
 export FZF_DEFAULT_COMMAND='ag --hidden -g "" --ignore ".git/" --ignore "bower_components" --ignore "legacy/framework" --ignore "legacy/protected/extensions"'
