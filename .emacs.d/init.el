@@ -98,14 +98,13 @@
             (setq magit-fetch-arguments '("--prune"))
             (use-package evil-magit
               :ensure t)
-            (use-package magit-gh-pulls
-              :defer t
+            (use-package magithub
+              :config (define-key magit-status-mode-map "#" #'magithub-dispatch-popup)
               :ensure t)
-            (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
             (setq magit-completing-read-function 'magit-ido-completing-read
                   magit-status-buffer-switch-function 'switch-to-buffer)
             (defun my-magit-section-visibility (section)
-              (and (member (magit-section-type section) '(pulls stashes)) 'hide))
+              (and (member (magit-section-type section) '(magithub-pull-request-list stashes)) 'hide))
             (add-hook 'magit-section-set-visibility-hook 'my-magit-section-visibility))
   :ensure t)
 (use-package nlinum
