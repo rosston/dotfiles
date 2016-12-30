@@ -1,0 +1,12 @@
+{
+  "profiles" : [
+    {
+      "simple_modifications" : {
+        "caps_lock" : "escape",
+        "escape" : "caps_lock"
+      },
+      "name" : "Internal Keyboard profile",
+      "selected" : true
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cp -f ~/.karabiner.d/configuration/internal_keyboard.json ~/.karabiner.d/configuration/karabiner.json

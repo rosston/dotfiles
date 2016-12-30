@@ -1,6 +1,9 @@
 .DS_Store
+.karabiner.d/configuration/karabiner.json
+.karabiner.d/log
 .netrwhist
 .init.vim-rplugin~
 .vim/autoload/plug.vim
 *.local
 plugged
+!*.local/
