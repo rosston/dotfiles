@@ -147,3 +147,5 @@
 (setq column-number-mode t)
 (setq scroll-margin 20
       scroll-step 1)
+
+(set-frame-font "Source Code Pro-13" nil t)
