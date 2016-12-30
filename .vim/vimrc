@@ -352,6 +352,8 @@ endif
 let g:gitgutter_realtime = 0
 " }}}
 
+command PrettyJSON %!python -m json.tool
+
 fun! <SID>StripTrailingWhitespaces()
     let l = line(".")
     let c = col(".")
