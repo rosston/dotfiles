@@ -30,6 +30,9 @@
   :bind (:map evil-normal-state-map
               (";" . evil-ex))
   :config (progn
+            (use-package evil-commentary
+              :ensure t
+              :init (evil-commentary-mode))
             (use-package evil-leader
               :config (progn
                         (evil-leader/set-leader "<SPC>")
@@ -38,6 +41,10 @@
                           "ls" 'ido-switch-buffer))
               :ensure t
               :init (global-evil-leader-mode))
+            (use-package evil-surround
+              :ensure t
+              :init (global-evil-surround-mode 1))
+
             (setq normal-state-cursor-string "\e]50;CursorShape=0\x7")
 
             (defun my-send-string-to-terminal (string)
@@ -146,7 +153,11 @@
 (global-set-key (kbd "C-l") 'soft-caps-lock-mode)
 
 (setq column-number-mode t)
+(setq fill-column 80)
 (setq scroll-margin 20
       scroll-step 1)
 
 (set-frame-font "Source Code Pro-13" nil t)
+
+(define-key evil-normal-state-map (read-kbd-macro "[b") 'evil-prev-buffer)
+(define-key evil-normal-state-map (read-kbd-macro "]b") 'evil-next-buffer)
