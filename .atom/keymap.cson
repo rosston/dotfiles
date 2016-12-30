@@ -43,5 +43,12 @@
   # Add shortcut to rename a file
   'cmd-k cmd-r': 'tree-view:rename'
 
-'atom-text-editor.vim-mode:not(.insert-mode)':
-  ';': 'ex-mode:open'
+'atom-text-editor.vim-mode-plus:not(.insert-mode)':
+  '; w enter': 'core:save'
+  '[ b': 'pane:show-previous-item'
+  '] b': 'pane:show-next-item'
+  'space space': 'fuzzy-finder:toggle-file-finder'
+  'space b': 'editor:move-to-previous-subword-boundary'
+  'space w': 'editor:move-to-next-subword-boundary'
+  'ctrl-i': 'cursor-history:next'
+  'ctrl-o': 'cursor-history:prev'

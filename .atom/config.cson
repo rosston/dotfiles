@@ -6,6 +6,7 @@
     scheme: "Pop"
   core:
     projectHome: "/Users/ross/Code"
+    telemetryConsent: "limited"
     themes: [
       "one-dark-ui"
       "cobalt2-syntax"
@@ -40,7 +41,7 @@
     statusBar: "Show all errors"
   "linter-eslint":
     disableWhenNoEslintrcFileInPath: true
-    globalNodePath: "/Users/ross/.nodenv/versions/4.3.0"
+    globalNodePath: "/Users/ross/.nodenv/versions/6.9.1"
     showRuleIdInMessage: true
     useGlobalEslint: true
   metrics:
@@ -55,6 +56,10 @@
     restoreWindow: false
   "tree-view":
     showOnRightSide: true
+  "vim-mode-plus":
+    highlightSearch: true
+    incrementalSearch: true
+    useSmartcaseForSearch: true
   welcome:
     showOnStartup: false
   "white-cursor": {}
