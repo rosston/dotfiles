@@ -87,6 +87,7 @@
 (use-package magit
   :config (progn
             (setq evil-magit-want-horizontal-movement t)
+            (setq git-commit-summary-max-length 50)
             (setq magit-fetch-arguments '("--prune"))
             (use-package evil-magit
               :ensure t)
