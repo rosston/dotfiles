@@ -312,6 +312,7 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 
 " vim-airline settings {{{
+let g:airline_theme = 'dark'
 let g:airline#extensions#tabline#enabled = 1
 " }}}
 
