@@ -95,10 +95,6 @@
   :ensure t
   :init (load-theme 'spacemacs-dark t nil))
 
-(setq column-number-mode t)
-(setq scroll-margin 20
-      scroll-step 1)
-
 (defun startup-magit ()
   (magit-status)
   (delete-other-windows))
@@ -131,3 +127,7 @@
     (remove-hook 'post-self-insert-hook 'soft-caps-capitalize t)))
 
 (global-set-key (kbd "C-l") 'soft-caps-lock-mode)
+
+(setq column-number-mode t)
+(setq scroll-margin 20
+      scroll-step 1)
