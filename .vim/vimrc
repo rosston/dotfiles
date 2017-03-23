@@ -366,6 +366,7 @@ let g:vim_jsx_pretty_colorful_config = 1
 let g:deoplete#auto_complete_delay = 150
 " }}}
 
+command Markdown !pandoc --from markdown_strict --to html --output /tmp/markdown.html %
 command PrettyJSON %!python -m json.tool
 
 fun! <SID>StripTrailingWhitespaces()
