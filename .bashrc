@@ -12,7 +12,7 @@ shopt -s globstar
 export VISUAL='/usr/local/bin/nvim'
 export EDITOR="$VISUAL"
 
-export PS1="\h:\W \u 🍔  "
+export PS1="\h:\W \u 🌮  "
 
 brew_prefix=$(brew --prefix)
 
