@@ -34,6 +34,7 @@ Plug 'tpope/vim-git'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'MaxMEllon/vim-jsx-pretty', { 'for': 'javascript' }
 Plug 'tpope/vim-obsession'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
@@ -353,6 +354,11 @@ endif
 
 " vim-gitgutter settings {{{
 let g:gitgutter_realtime = 0
+" }}}
+
+
+" vim-jsx-pretty settings {{{
+let g:vim_jsx_pretty_colorful_config = 1
 " }}}
 
 command PrettyJSON %!python -m json.tool
