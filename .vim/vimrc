@@ -41,16 +41,17 @@ Plug 'tpope/vim-unimpaired'
 call plug#end()
 
 " Custom load some plugins
-" Vim only (not Neovim)
-if !has('nvim')
-    call plug#load('ctrlp.vim', 'neocomplete.vim')
+if has('nvim') " Neovim only
+    call plug#load('deoplete.nvim')
+    autocmd InsertEnter * call deoplete#enable()
+else " Vim only (not Neovim)
+    call plug#load('neocomplete.vim')
     autocmd InsertEnter * NeoCompleteEnable
 endif
-
-" Neovim only
-if has('nvim')
-    call plug#load('deoplete.nvim', 'fzf', 'fzf.vim')
-    autocmd InsertEnter * call deoplete#enable()
+if has('gui_running')
+    call plug#load('ctrlp.vim')
+else
+    call plug#load('fzf', 'fzf.vim')
 endif
 
 filetype plugin indent on       " enable detection, plugins and indenting in one step
@@ -294,6 +295,16 @@ let g:ctrlp_custom_ignore = {
     \ 'file': '\v[\/](\.DS_Store)$',
     \ 'dir': '\v[\/](\.git|\.idea|bower_components|dist|legacy\/framework|node_modules|tmp|utilities\/deployment\/package\/content)$',
     \ }
+let g:ctrlp_prompt_mappings = {
+    \ 'PrtSelectMove("j")':   ['<c-n>', '<c-j>', '<down>'],
+    \ 'PrtSelectMove("k")':   ['<c-p>', '<c-k>', '<up>'],
+    \ 'PrtHistory(-1)':       [],
+    \ 'PrtHistory(1)':        [],
+    \ }
+if executable('ag')
+    let g:ctrlp_user_command = 'ag --hidden -g "" --ignore ".git/" --ignore "bower_components" --ignore "legacy/framework" --ignore "legacy/protected/extensions" -l --nocolor %s'
+    let g:ctrlp_use_caching = 0
+endif
 " }}}
 
 
