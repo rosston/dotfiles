@@ -2,6 +2,9 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+scriptencoding utf-8
+set encoding=utf-8
+
 " Use vim-plug to manage plugins
 filetype off                    " force reloading *after* vim-plug loads
 call plug#begin('~/.vim/plugged')
