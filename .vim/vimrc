@@ -48,7 +48,7 @@ call plug#end()
 " Custom load some plugins
 if has('nvim') " Neovim only
     call plug#load('deoplete.nvim')
-    autocmd InsertEnter * call deoplete#enable()
+    call deoplete#enable()
 else " Vim only (not Neovim)
     call plug#load('neocomplete.vim')
     autocmd InsertEnter * NeoCompleteEnable
