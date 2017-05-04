@@ -335,7 +335,11 @@ let g:airline#extensions#tabline#enabled = 1
 
 " neomake settings {{{
 " automatically run neomake after saving file
-autocmd! BufWritePost * Neomake
+function! RunNeomake()
+    execute 'Neomake'
+    execute 'lcd %:p:h'
+endfunction
+autocmd! BufWritePost * call RunNeomake()
 
 " automatically show/hide location list based on errors
 let g:neomake_open_list = 2
