@@ -150,6 +150,7 @@ set undolevels=1000             " use many muchos levels of undo
 set undofile                " keep a persistent backup file
 set undodir=~/.vim/tmp/.undo,~/tmp,/tmp
                                 " store undo files in one of these directories
+set backupcopy=yes
 set backupdir=~/.vim/tmp/backup/,~/tmp,/tmp
                                 " store backup files in one of these
                                 " directories
