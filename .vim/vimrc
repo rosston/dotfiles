@@ -208,6 +208,9 @@ nnoremap <silent> <leader>rel :set relativenumber!<cr>
 
 " Launch Ack
 nnoremap <leader>ag :Ack! ""<left>
+
+" Copy path to current file
+nnoremap <leader>yp :CopyPath<CR>
 " }}}
 
 
@@ -373,6 +376,7 @@ let g:vim_jsx_pretty_colorful_config = 1
 let g:deoplete#auto_complete_delay = 150
 " }}}
 
+command CopyPath let @* = expand("%:p")
 command Markdown !pandoc --from markdown_strict --to html --output /tmp/markdown.html %
 command PrettyJSON %!python -m json.tool
 
