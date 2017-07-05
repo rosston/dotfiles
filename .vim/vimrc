@@ -171,6 +171,10 @@ set cursorline                  " underline the current line, for quick orientat
 " save and restore cursor position when switching buffers
 au BufLeave * let b:winview = winsaveview()
 au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+
+if has('nvim')
+    set inccommand=split
+end
 " }}}
 
 
