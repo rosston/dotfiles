@@ -1,0 +1,53 @@
+#!/bin/bash
+
+set -e
+
+USAGE=$(cat <<"EOF"
+Usage:
+    git-cherry-pick-merge <destination_branch> <merge_commit_ref>
+    git-cherry-pick-merge --continue
+
+Cherry-pick a merge commit (and its ancestors from the merged branch) onto
+<destination_branch>, keeping the merge commit intact.
+
+It is possible that a rebase failure will prevent this process from being
+completely automatic. You will have to complete the rebase manually and run
+`git-cherry-pick-merge --continue`.
+EOF
+)
+
+if [ -z "$1" -o "$1" = "--help" -o "$1" = "help" ]; then
+    echo "$USAGE"
+    exit 0
+fi
+
+is_in_continue_mode=0
+if [ "$1" = "--continue" ]; then
+    is_in_continue_mode=1
+fi
+
+base_branch="$1"
+merge_commit="$2"
+tmp_merge_branch="tmp-merge-branch___${base_branch}___${merge_commit}"
+if [ "$is_in_continue_mode" -eq "1" ]; then
+    tmp_merge_branch=`git branch | grep \* | cut -d ' ' -f 2`
+    # Ugh, it's just easier to use a real scripting language to split a string
+    base_branch=`python -c "print('${tmp_merge_branch}'.split('___')[1])"`
+    merge_commit=`python -c "print('${tmp_merge_branch}'.split('___')[2])"`
+fi
+
+merge_commit_msg=`git show -s --format=%B "$merge_commit"`
+
+if [ "$is_in_continue_mode" -eq "0" ]; then
+    git fetch
+    git checkout -b "$tmp_merge_branch" "$merge_commit"
+    git rebase --onto "origin/${base_branch}" "${merge_commit}^1" "$tmp_merge_branch" || {
+        echo -e "==============================\n\nFinish your rebase manually and run \"git-cherry-pick-merge --continue\"\n"
+        exit 1
+    }
+fi
+
+git checkout "$base_branch"
+git pull
+git merge --no-ff "$tmp_merge_branch" -m "$merge_commit_msg" -e
+git branch -D "$tmp_merge_branch"
