@@ -379,6 +379,8 @@ let g:vim_jsx_pretty_colorful_config = 1
 
 " deoplete settings {{{
 let g:deoplete#auto_complete_delay = 150
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
 " }}}
 
 command CopyPath let @* = expand("%:p")
