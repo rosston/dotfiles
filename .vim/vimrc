@@ -211,6 +211,9 @@ nnoremap <silent> <leader>/ :nohlsearch<CR>
 " Toggle relative line numbers
 nnoremap <silent> <leader>rel :set relativenumber!<cr>
 
+" Close buffer without closing window
+nnoremap <leader>bd :bp<CR>:bd#<CR>
+
 " Launch Ack
 nnoremap <leader>ag :Ack! ""<left>
 
