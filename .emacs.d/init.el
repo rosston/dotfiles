@@ -30,6 +30,7 @@
   :bind (:map evil-normal-state-map
               (";" . evil-ex))
   :config (progn
+            (setq evil-search-module 'evil-search)
             (use-package evil-commentary
               :ensure t
               :init (evil-commentary-mode))
@@ -41,6 +42,7 @@
                           "ls" 'ido-switch-buffer))
               :ensure t
               :init (global-evil-leader-mode))
+            (use-package evil-search)
             (use-package evil-surround
               :ensure t
               :init (global-evil-surround-mode 1))
