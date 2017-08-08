@@ -238,7 +238,9 @@ autocmd FileType css,less,sass,scss setlocal iskeyword+=-
 
 
 " Strip trailing whitespace {{{
-autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+augroup StripTrailingWhitespaces
+    autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+augroup END
 " }}}
 
 " Style/theme settings {{{
