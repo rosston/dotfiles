@@ -23,6 +23,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all', 'on': [] }
 Plug 'junegunn/fzf.vim', { 'on': [] }
 Plug 'Shougo/neocomplete.vim', { 'on': [] }
 Plug 'neomake/neomake'
+Plug 'francoiscabrol/ranger.vim'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-abolish'
 Plug 'MarcWeber/vim-addon-local-vimrc'
