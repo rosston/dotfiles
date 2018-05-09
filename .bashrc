@@ -22,8 +22,8 @@ export PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/.cargo/bin:~/.local/bin"
 
 alias ag='ag -p ~/.config/ag/agignore'
 alias awake='caffeinate -d'
-alias cls='clear && echo -en "\e[3J"'
 alias be='bundle exec'
+alias c='clear && echo -en "\e[3J"'
 alias embiggen='printf "\e[8;40;100t"'
 alias g='git '
 alias ggrep='git grep --break --heading -n'
