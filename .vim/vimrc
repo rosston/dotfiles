@@ -29,6 +29,7 @@ Plug 'tpope/vim-abolish'
 Plug 'MarcWeber/vim-addon-local-vimrc'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'moll/vim-bbye'
 Plug 'tpope/vim-capslock'
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-commentary'
@@ -212,9 +213,6 @@ nnoremap <silent> <leader>sc :nohlsearch<CR>
 
 " Toggle relative line numbers, makes it easier to use motion commands
 nnoremap <silent> <leader>rel :set relativenumber!<cr>
-
-" Close buffer without closing window
-nnoremap <leader>bd :bp<CR>:bd#<CR>
 
 " Launch Ack
 nnoremap <leader>sap :ProjectRootExe Ack! ""<left>
