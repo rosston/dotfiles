@@ -44,6 +44,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'MaxMEllon/vim-jsx-pretty', { 'for': 'javascript' }
 Plug 'tpope/vim-obsession'
+Plug 'dbakker/vim-projectroot'
 Plug 'digitaltoad/vim-pug'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
@@ -394,6 +395,7 @@ let g:deoplete#enable_smart_case = 1
 command CopyPath let @* = expand("%:p")
 command Markdown !pandoc --from markdown_strict --to html --output /tmp/markdown.html %
 command PrettyJSON %!python -m json.tool
+command Session :exe 'Obsession' projectroot#guess()
 
 fun! <SID>StripTrailingWhitespaces()
     let l = line(".")
