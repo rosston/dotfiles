@@ -412,6 +412,9 @@ you should place your code here."
     turn off indentation support for it."
       nil))
 
+  ;; JSX mode customization
+  (spacemacs/add-flycheck-hook 'rjsx-mode)
+
   ;; Python mode customization
   (add-hook 'python-mode-hook
             (lambda ()
