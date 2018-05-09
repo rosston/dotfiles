@@ -205,17 +205,19 @@ vnoremap > >gv
 " Allow quickly searching for the visually selected text
 vnoremap // y/<C-R>"<CR>
 
-" Clears the search register
-nnoremap <silent> <leader>/ :nohlsearch<CR>
+nnoremap <leader>w <C-w>
 
-" Toggle relative line numbers
+" Clears the search register
+nnoremap <silent> <leader>sc :nohlsearch<CR>
+
+" Toggle relative line numbers, makes it easier to use motion commands
 nnoremap <silent> <leader>rel :set relativenumber!<cr>
 
 " Close buffer without closing window
 nnoremap <leader>bd :bp<CR>:bd#<CR>
 
 " Launch Ack
-nnoremap <leader>ag :Ack! ""<left>
+nnoremap <leader>sap :ProjectRootExe Ack! ""<left>
 
 " Copy path to current file
 nnoremap <leader>yp :CopyPath<CR>

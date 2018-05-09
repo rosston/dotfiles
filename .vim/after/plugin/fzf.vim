@@ -15,6 +15,6 @@ if exists(':Files')
         \ 'sink*': function('<SID>jira_list_handler'),
         \ 'window': 'belowright 10new'})
 
-    nnoremap <silent> <leader><space> :exe 'Files ' . <SID>fzf_root()<CR>
-    nnoremap <silent> <leader>ls :Buffers<CR>
+    nnoremap <silent> <leader>pf :exe 'Files ' . <SID>fzf_root()<CR>
+    nnoremap <silent> <leader>bb :Buffers<CR>
 endif
