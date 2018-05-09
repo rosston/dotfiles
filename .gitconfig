@@ -1,4 +1,5 @@
 [alias]
+    f = fetch
     co = checkout
     ci = commit
     st = status
@@ -12,6 +13,7 @@
     helper = osxkeychain
 [mergetool]
     keepBackup = true
+	prompt = false
 [push]
     default = simple
 [user]
@@ -19,3 +21,8 @@
     email = ross.brandes@gmai"l.co"m
 [include]
     path = .gitconfig.local
+[includeIf "gitdir:~/src/**"]
+    path = .gitconfig.work
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
