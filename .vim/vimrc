@@ -293,7 +293,7 @@ let b:surround_111 = "\r"
 
 
 " CamelCaseMotion settings {{{
-call camelcasemotion#CreateMotionMappings('<leader>')
+call camelcasemotion#CreateMotionMappings('\')
 " }}}
 
 
