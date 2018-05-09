@@ -25,6 +25,7 @@ Plug 'Shougo/neocomplete.vim', { 'on': [] }
 Plug 'neomake/neomake'
 Plug 'mhartington/nvim-typescript', { 'do': function('DoRemote'), 'on': [] }
 Plug 'francoiscabrol/ranger.vim'
+Plug 'rust-lang/rust.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-abolish'
