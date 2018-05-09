@@ -398,4 +398,3 @@ fun! <SID>StripTrailingWhitespaces()
     %s/\s\+$//e
     call cursor(l, c)
 endfun
-
