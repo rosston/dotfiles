@@ -341,6 +341,11 @@ you should place your code here."
   (if (window-system)
       (set-frame-size (selected-frame) 100 40))
 
+  ;; Scroll before end of window is hit
+  (setq
+   scroll-margin 20
+   scroll-step 1)
+
   ;; Fix shell-pop-el in Emacs 25. See
   ;; https://github.com/kyagi/shell-pop-el/issues/51#issuecomment-297470855
   (push (cons "\\*shell\\*" display-buffer--same-window-action) display-buffer-alist)
@@ -433,12 +438,7 @@ you should place your code here."
   ;; Web mode customization
   (add-hook 'web-mode-hook
             (lambda ()
-              (setq web-mode-markup-indent-offset 2)))
-
-  ;; Scroll before end of window is hit
-  (setq
-   scroll-margin 20
-   scroll-step 1))
+              (setq web-mode-markup-indent-offset 2))))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
