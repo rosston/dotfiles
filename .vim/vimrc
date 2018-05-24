@@ -268,10 +268,10 @@ endif
 colorscheme cobalt2
 
 if g:colors_name == 'cobalt2'
-    " set a sane background color for current line
+    " set a sensible background color for current line
     :hi CursorLine guifg=NONE guibg=#1f4662 ctermfg=NONE
 
-    " make the wrap guide less crazy than pure black
+    " make the wrap guide better than pure black
     highlight ColorColumn ctermbg=lightgrey guibg=#3b5364
 endif
 
@@ -336,12 +336,6 @@ let $FZF_DEFAULT_COMMAND = 'find . ! -wholename "*.DS_Store" ! -wholename "*.git
 if executable('ag')
     let $FZF_DEFAULT_COMMAND = 'ag --hidden -g "" --ignore ".git/" --ignore "bower_components" --ignore "legacy/framework" --ignore "legacy/protected/extensions"'
 endif
-" }}}
-
-
-" YouCompleteMe settings {{{
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 " }}}
 
 
