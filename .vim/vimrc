@@ -14,6 +14,7 @@ function! DoRemote(arg)
 endfunction
 
 Plug 'mileszs/ack.vim'
+Plug 'w0rp/ale'
 Plug 'bkad/CamelCaseMotion'
 Plug 'GertjanReynaert/cobalt2-vim-theme'
 Plug 'ctrlpvim/ctrlp.vim', { 'on': [] }
@@ -22,7 +23,6 @@ Plug 'mattn/emmet-vim', { 'for': 'html' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all', 'on': [] }
 Plug 'junegunn/fzf.vim', { 'on': [] }
 Plug 'Shougo/neocomplete.vim', { 'on': [] }
-Plug 'neomake/neomake'
 Plug 'mhartington/nvim-typescript', { 'do': function('DoRemote'), 'on': [] }
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rust-lang/rust.vim'
@@ -346,26 +346,19 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 " vim-airline settings {{{
 let g:airline_theme = 'dark'
+let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 " }}}
 
 
-" neomake settings {{{
-" automatically run neomake after saving file
-function! RunNeomake()
-    execute 'Neomake'
-    execute 'lcd %:p:h'
-endfunction
-autocmd! BufWritePost * call RunNeomake()
+" ALE settings {{{
+let g:ale_linters = {
+    \ 'html': [],
+    \ 'javascript': ['standard'],
+    \ 'ruby': ['mri', 'rubocop'],
+    \ }
 
-" automatically show/hide location list based on errors
-let g:neomake_open_list = 2
-" keep the location list (of errors) small
-let g:neomake_list_height = 5
 
-let g:neomake_html_enabled_makers = []
-let g:neomake_javascript_enabled_makers = ['standard']
-let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
 " }}}
 
 
