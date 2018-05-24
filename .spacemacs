@@ -369,6 +369,24 @@ you should place your code here."
     (define-key company-active-map (kbd "C-n") #'company-select-next)
     (define-key company-active-map (kbd "C-p") #'company-select-previous))
 
+  ;;
+  ;; Add soft caps lock minor mode
+  ;;
+  (defun soft-caps-capitalize ()
+    (upcase-region (1- (point)) (point)))
+  ; Props to https://github.com/jordonbiondo for this mode and its backing function
+  (define-minor-mode soft-caps-lock-mode
+    "A mode for software capslock"
+    :init-value nil
+    :lighter " softcaps"
+    :keymap nil
+    (if soft-caps-lock-mode
+        (add-hook 'post-self-insert-hook 'soft-caps-capitalize nil t)
+      (remove-hook 'post-self-insert-hook 'soft-caps-capitalize t)))
+  (global-set-key (kbd "C-l") 'soft-caps-lock-mode)
+  (add-hook 'evil-insert-state-exit-hook
+            (lambda () (soft-caps-lock-mode -1)))
+
   ;; Magit config
   (setq
    git-commit-summary-max-length 50
