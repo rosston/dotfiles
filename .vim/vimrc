@@ -37,6 +37,7 @@ Plug 'tpope/vim-capslock'
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-commentary'
 Plug 'tommcdo/vim-exchange'
+Plug 'flowtype/vim-flow', { 'for': 'javascript' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'airblade/vim-gitgutter'
@@ -357,8 +358,11 @@ let g:ale_linters = {
     \ 'javascript': ['standard'],
     \ 'ruby': ['mri', 'rubocop'],
     \ }
+" }}}
 
 
+" vim-flow settings {{{
+let g:flow#enable = 0
 " }}}
 
 
