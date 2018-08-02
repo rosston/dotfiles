@@ -14,11 +14,9 @@ export EDITOR="$VISUAL"
 
 export PS1="\h:\W \u 🌮  "
 
-brew_prefix=$(brew --prefix)
-
-# PHP 5.5 path may occasionally need to be updated with output from
-# `brew --prefix homebrew/php/php55`
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/.cargo/bin:~/.local/bin"
+
+brew_prefix=$(brew --prefix)
 
 alias ag='ag -p ~/.config/ag/agignore'
 alias awake='caffeinate -d'
