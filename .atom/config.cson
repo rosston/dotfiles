@@ -21,7 +21,6 @@
     showIndentGuide: true
     softWrap: true
     softWrapAtPreferredLineLength: true
-    tabLength: 4
   emmet: {}
   "exception-reporting":
     userId: "8a401373-8223-9b89-cde9-6f0e2b6d86e4"
