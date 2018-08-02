@@ -14,6 +14,7 @@
   docblockr: {}
   editor:
     fontFamily: "Source Code Pro"
+    fontSize: 16
     invisibles: {}
     lineHeight: 1.4
     nonWordCharacters: "/\\()\"':,.;<>~!#%^&*|+=[]{}`?-"
