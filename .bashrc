@@ -1,7 +1,7 @@
 # Increase the maximum number of open file descriptors
 ulimit -n 1024
 
-export HISTCONTROL=erasedups
+export HISTCONTROL="ignorespace:erasedups"
 export HISTSIZE=10000000
 # When the shell exits, append to the history file instead of overwriting it
 shopt -s histappend
