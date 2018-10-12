@@ -39,6 +39,7 @@ Plug 'guns/vim-clojure-static'
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-commentary'
 Plug 'tommcdo/vim-exchange'
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'flowtype/vim-flow', { 'for': 'javascript' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
