@@ -1,5 +1,6 @@
 .DS_Store
 .git
+.hg
 .idea
 bower_components
 node_modules
