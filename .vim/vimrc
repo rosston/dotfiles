@@ -24,6 +24,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all', 'on': [] }
 Plug 'junegunn/fzf.vim', { 'on': [] }
 Plug 'Shougo/neocomplete.vim', { 'on': [] }
 Plug 'mhartington/nvim-typescript', { 'do': function('DoRemote'), 'on': [] }
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'leafgarland/typescript-vim'
@@ -381,6 +382,14 @@ let g:vim_jsx_pretty_colorful_config = 1
 let g:deoplete#auto_complete_delay = 150
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
+" }}}
+
+" rainbow_parentheses settings {{{
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+
+augroup rainbow_lisp
+  autocmd FileType lisp,clojure,scheme RainbowParentheses
+augroup END
 " }}}
 
 command CopyPath let @* = expand("%:p")
