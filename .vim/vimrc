@@ -319,7 +319,7 @@ let g:ctrlp_open_multiple_files = 'i'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = {
     \ 'file': '\v[\/](\.DS_Store)$',
-    \ 'dir': '\v[\/](\.git|\.idea|bower_components|dist|legacy\/framework|node_modules|tmp|utilities\/deployment\/package\/content)$',
+    \ 'dir': '\v[\/](\.git|\.hg|\.idea|bower_components|node_modules|tmp|)$',
     \ }
 let g:ctrlp_prompt_mappings = {
     \ 'PrtSelectMove("j")':   ['<c-n>', '<c-j>', '<down>'],
@@ -328,16 +328,16 @@ let g:ctrlp_prompt_mappings = {
     \ 'PrtHistory(1)':        [],
     \ }
 if executable('ag')
-    let g:ctrlp_user_command = 'ag --hidden -g "" --ignore ".git/" --ignore "bower_components" --ignore "legacy/framework" --ignore "legacy/protected/extensions" -l --nocolor %s'
+    let g:ctrlp_user_command = 'ag --hidden -g "" --ignore ".git/" --ignore ".hg/" --ignore "bower_components" -l --nocolor %s'
     let g:ctrlp_use_caching = 0
 endif
 " }}}
 
 
 " FZF settings {{{
-let $FZF_DEFAULT_COMMAND = 'find . ! -wholename "*.DS_Store" ! -wholename "*.git*" ! -wholename "*.idea*" ! -wholename "*bower_components*" ! -wholename "*client/dist*" ! -wholename "*legacy/framework*" ! -wholename "*node_modules*" ! -wholename "*utilities/deployment/package/content*" ! -wholename "*legacy/protected/extensions*"'
+let $FZF_DEFAULT_COMMAND = 'find . ! -wholename "*.DS_Store" ! -wholename "*.git*" ! -wholename "*.hg*" ! -wholename "*.idea*" ! -wholename "*bower_components*" ! -wholename "*node_modules*"'
 if executable('ag')
-    let $FZF_DEFAULT_COMMAND = 'ag --hidden -g "" --ignore ".git/" --ignore "bower_components" --ignore "legacy/framework" --ignore "legacy/protected/extensions"'
+    let $FZF_DEFAULT_COMMAND = 'ag --hidden -g "" --ignore ".git/" --ignore ".hg/" --ignore "bower_components"'
 endif
 " }}}
 
