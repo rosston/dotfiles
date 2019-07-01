@@ -24,6 +24,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all', 'on': [] }
 Plug 'junegunn/fzf.vim', { 'on': [] }
 Plug 'Shougo/neocomplete.vim', { 'on': [] }
 Plug 'mhartington/nvim-typescript', { 'do': function('DoRemote'), 'on': [] }
+Plug 'kovisoft/paredit'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rust-lang/rust.vim'
