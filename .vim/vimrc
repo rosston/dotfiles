@@ -50,6 +50,7 @@ Plug 'MaxMEllon/vim-jsx-pretty', { 'for': 'javascript' }
 Plug 'tpope/vim-obsession'
 Plug 'dbakker/vim-projectroot'
 Plug 'digitaltoad/vim-pug'
+Plug 'google/vim-searchindex'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
