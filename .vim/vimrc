@@ -227,6 +227,11 @@ nnoremap <leader>sap :ProjectRootExe Ack! ""<left>
 
 " Copy path to current file
 nnoremap <leader>yp :CopyPath<CR>
+
+" git shortcuts
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gb :Gblame<CR>
+
 " }}}
 
 
