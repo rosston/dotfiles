@@ -14,7 +14,7 @@ export EDITOR="$VISUAL"
 
 export PS1="\h:\W \u 🌮  "
 
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/.cargo/bin:~/.local/bin"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH:/Users/ross/.cargo/bin:/Users/ross/.local/bin"
 
 brew_prefix=$(brew --prefix)
 
