@@ -283,7 +283,7 @@ if (has("termguicolors"))
     set termguicolors
 endif
 
-if has('gui_running')
+if has('gui_running') && exists('&guifont')
   set guifont=Source\ Code\ Pro:h16
 endif
 
