@@ -363,11 +363,18 @@ let g:airline#extensions#tabline#enabled = 1
 
 
 " ALE settings {{{
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+    \ 'typescript': ['tslint'],
+    \ }
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_linters = {
     \ 'html': [],
     \ 'javascript': ['standard'],
-    \ 'ruby': ['mri', 'rubocop'],
+    \ 'ruby': ['rubocop', 'ruby'],
     \ }
+let g:ale_set_highlights = 0
 " }}}
 
 
