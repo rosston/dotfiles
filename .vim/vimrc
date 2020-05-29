@@ -45,9 +45,12 @@ Plug 'flowtype/vim-flow', { 'for': 'javascript' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'airblade/vim-gitgutter'
+Plug 'jparise/vim-graphql'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'MaxMEllon/vim-jsx-pretty', { 'for': 'javascript' }
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'lfe-support/vim-lfe'
 Plug 'tpope/vim-obsession'
 Plug 'dbakker/vim-projectroot'
 Plug 'digitaltoad/vim-pug'
