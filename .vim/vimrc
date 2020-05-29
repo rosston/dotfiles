@@ -68,6 +68,11 @@ call plug#end()
 if has('nvim') " Neovim only
     call plug#load('deoplete.nvim')
     call deoplete#enable()
+    call deoplete#custom#option({
+    \ 'auto_complete_delay': 150,
+    \ 'ignore_case': v:true,
+    \ 'smart_case': v:true,
+    \ })
 else " Vim only (not Neovim)
     call plug#load('neocomplete.vim')
     autocmd InsertEnter * NeoCompleteEnable
@@ -397,13 +402,6 @@ let g:gitgutter_realtime = 0
 
 " vim-jsx-pretty settings {{{
 let g:vim_jsx_pretty_colorful_config = 1
-" }}}
-
-
-" deoplete settings {{{
-let g:deoplete#auto_complete_delay = 150
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
 " }}}
 
 " vim-clojure-static settings {{{
