@@ -55,6 +55,7 @@ Plug 'tpope/vim-obsession'
 Plug 'dbakker/vim-projectroot'
 Plug 'digitaltoad/vim-pug'
 Plug 'google/vim-searchindex'
+Plug 'justinmk/vim-sneak'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
 Plug 'thinca/vim-textobj-between'
@@ -211,7 +212,7 @@ vnoremap / /\v
 " Don't require the Shift key to form chords to enter ex mode.
 nnoremap ; :
 " Remap old behavior of ; (repeat last f, F, t, or T command) to <leader>;
-nnoremap <leader>; ;
+map <leader>; <Plug>Sneak_;
 
 " Remap j and k to act as expected when used on long, wrapped, lines
 nnoremap j gj
@@ -402,6 +403,10 @@ let g:gitgutter_realtime = 0
 
 " vim-jsx-pretty settings {{{
 let g:vim_jsx_pretty_colorful_config = 1
+" }}}
+
+" vim-sneak settings {{{
+let g:sneak#label = 1
 " }}}
 
 " vim-clojure-static settings {{{
