@@ -263,6 +263,9 @@ autocmd FileType css,less,sass,scss setlocal iskeyword+=-
 
 
 " Strip trailing whitespace {{{
+if !exists("g:rosston_strip_trailing_whitespace")
+  let g:rosston_strip_trailing_whitespace=1
+endif
 augroup StripTrailingWhitespaces
     autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 augroup END
@@ -427,8 +430,10 @@ command PrettyJSON %!python -m json.tool
 command Session :exe 'Obsession' projectroot#guess()
 
 fun! <SID>StripTrailingWhitespaces()
+  if g:rosston_strip_trailing_whitespace == 1
     let l = line(".")
     let c = col(".")
     %s/\s\+$//e
     call cursor(l, c)
+  endif
 endfun
