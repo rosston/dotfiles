@@ -428,6 +428,7 @@ command CopyPath let @* = expand("%:p") | echo expand("%:p")
 command Markdown !pandoc --from markdown_strict --to html --output /tmp/markdown.html %
 command PrettyJSON %!python -m json.tool
 command Session :exe 'Obsession' projectroot#guess()
+command Overmind :ProjectRootExe exe ':!overmind ' . input('Run: overmind ')
 
 fun! <SID>StripTrailingWhitespaces()
   if g:rosston_strip_trailing_whitespace == 1
