@@ -1,0 +1,10 @@
+#!/bin/sh
+
+date1=$((`date +%s` + $1));
+
+while [ "$date1" -ge `date +%s` ]; do
+  echo $(($date1 - `date +%s`))
+  sleep 1
+done
+echo "TIME'S UP!"
+echo '\007'
