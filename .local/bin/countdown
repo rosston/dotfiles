@@ -1,6 +1,14 @@
 #!/bin/sh
 
-date1=$((`date +%s` + $1));
+if [ -z $1 ]; then
+  echo "Usage: countdown val[ymwdHMS]"
+  echo ""
+  echo "    val should of a form accepted by \`date -v\`, e.g.,"
+  echo "    \`countdown 2M\` to set a timer for 2 minutes"
+  exit 0
+fi
+
+date1=`date -v+$1 +%s`
 
 while [ "$date1" -ge `date +%s` ]; do
   echo $(($date1 - `date +%s`))
