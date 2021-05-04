@@ -1,0 +1,6 @@
+#!/bin/sh
+
+address=`blueutil --recent --format json | jq -r '. | sort_by(.recentAccessDate) | reverse | map(select(.name)) | map(select(.name|test("AirPods"))) | .[0] | .address'`
+
+blueutil --disconnect "$address"
+blueutil --connect "$address"
