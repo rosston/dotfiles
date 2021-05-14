@@ -443,6 +443,11 @@ command Markdown !pandoc --from markdown_strict --to html --output /tmp/markdown
 command PrettyJSON %!python -m json.tool
 command Session :exe 'Obsession' projectroot#guess()
 command Overmind :ProjectRootExe exe ':!overmind ' . input('Run: overmind ')
+command! -nargs=* Psh :call <SID>RunProjectCommand([<f-args>])
+
+fun! <SID>RunProjectCommand(args)
+  call projectroot#exe(['exe', '":!' . join(a:args) . '"'])
+endfun
 
 fun! <SID>StripTrailingWhitespaces()
   if g:rosston_strip_trailing_whitespace == 1
