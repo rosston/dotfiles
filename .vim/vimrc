@@ -242,6 +242,9 @@ nnoremap <leader>sap :ProjectRootExe Ack! ""<left>
 " Copy path to current file
 nnoremap <leader>yp :CopyPath<CR>
 
+" Insert em dash
+nnoremap <leader>i- :EmDash<CR>
+
 " git shortcuts
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gb :Gblame<CR>
@@ -432,6 +435,7 @@ augroup END
 " }}}
 
 command CopyPath let @* = expand("%:p") | echo expand("%:p")
+command EmDash :normal i—
 command Markdown !pandoc --from markdown_strict --to html --output /tmp/markdown.html %
 command PrettyJSON %!python -m json.tool
 command Session :exe 'Obsession' projectroot#guess()
