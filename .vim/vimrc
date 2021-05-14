@@ -262,6 +262,9 @@ endif
 " filetype-specific settings {{{
 " Don't treat '-' as a word break character in the CSS language family
 autocmd FileType css,less,sass,scss setlocal iskeyword+=-
+
+" Force .lfe files to be treated as lisp
+autocmd BufNewFile,BufRead *.lfe set ft=lisp
 " }}}
 
 
