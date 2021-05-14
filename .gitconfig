@@ -26,3 +26,11 @@
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3
+[commit]
+	gpgsign = true
+[github]
+	user = rosston
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
