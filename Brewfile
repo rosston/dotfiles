@@ -1,0 +1,23 @@
+# Tools I want
+brew "blueutil"
+brew "emacs"
+brew "ffmpeg"
+brew "git"
+brew "mercurial"
+brew "mosh"
+brew "mpv"
+brew "neovim"
+brew "node-build"
+brew "nodenv"
+brew "overmind"
+brew "tmux"
+brew "rbenv"
+brew "ruby-build"
+brew "the_silver_searcher"
+brew "thefuck"
+brew "vim"
+brew "youtube-dl"
+
+# For docker-mac-vagrant
+brew "direnv"
+cask "vagrant"
