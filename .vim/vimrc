@@ -249,6 +249,9 @@ nnoremap <leader>i- :EmDash<CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gb :Git blame<CR>
 
+" jump to buffer by number
+nnoremap <silent> <leader>bn :exe "buf" nr2char(getchar())<cr>
+
 " }}}
 
 
