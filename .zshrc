@@ -52,6 +52,8 @@ eval "$(nodenv init -)"
 
 eval "$(rbenv init -)"
 
+eval $(thefuck --alias)
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
