@@ -17,7 +17,3 @@ brew "the_silver_searcher"
 brew "thefuck"
 brew "vim"
 brew "youtube-dl"
-
-# For docker-mac-vagrant
-brew "direnv"
-cask "vagrant"
