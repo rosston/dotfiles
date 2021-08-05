@@ -4,6 +4,13 @@ ulimit -n 1024
 # Use Emacs keybindings (<3 ctrl-n and ctrl-p)
 bindkey -e
 
+# Enable Ctrl-x-e to edit command line
+autoload -U edit-command-line
+# And bind it to Emacs style keybindings (copying bash's keybinding)
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
+
 export HISTFILE=~/.zsh_history
 export HISTSIZE=10000100
 export SAVEHIST=10000000
