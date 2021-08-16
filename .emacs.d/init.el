@@ -38,8 +38,9 @@
               :config (progn
                         (evil-leader/set-leader "<SPC>")
                         (evil-leader/set-key
-                          "<SPC>" 'fzf
-                          "ls" 'ido-switch-buffer))
+                          "pf" 'fzf
+                          "gs" 'startup-magit
+                          "bb" 'ido-switch-buffer))
               :ensure t
               :init (global-evil-leader-mode))
             (use-package evil-search)
@@ -128,6 +129,7 @@
   :init (load-theme 'spacemacs-dark t nil))
 
 (defun startup-magit ()
+  (interactive)
   (magit-status)
   (delete-other-windows))
 
