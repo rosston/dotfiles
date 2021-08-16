@@ -78,11 +78,12 @@
 (use-package ido
   :config (progn
             (ido-mode t)
+            (ido-everywhere t)
             (use-package flx-ido
               :config (flx-ido-mode t)
               :ensure t)
-            (use-package ido-ubiquitous
-              :config (ido-ubiquitous-mode)
+            (use-package ido-completing-read+
+              :config (ido-ubiquitous-mode t)
               :ensure t)
             (use-package ido-vertical-mode
               :config (ido-vertical-mode)
