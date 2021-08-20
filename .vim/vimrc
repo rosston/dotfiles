@@ -460,3 +460,28 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
   endif
 endfun
+
+fun! <SID>CountO()
+  let l:count = v:count1
+  while l:count
+    call append(line('.'), '')
+    normal! j
+    let l:count -= 1
+  endwhile
+  execute "normal \"_cc\<Space>\<BS>\<Esc>"
+  startinsert!
+endfun
+
+fun! <SID>CountShiftO()
+  let l:count = v:count1
+  while l:count
+    call append(line('.') - 1, '')
+    normal! k
+    let l:count -= 1
+  endwhile
+  execute "normal \"_cc\<Space>\<BS>\<Esc>"
+  startinsert!
+endfun
+
+nnoremap <silent> o :<C-U>call <SID>CountO()<CR>
+nnoremap <silent> O :<C-U>call <SID>CountShiftO()<CR>
