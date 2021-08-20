@@ -69,7 +69,9 @@
             (add-hook 'evil-insert-state-exit-hook
                       (lambda () (soft-caps-lock-mode -1))))
   :ensure t
-  :init (evil-mode t))
+  :init (progn
+          (setq evil-want-keybinding nil)
+          (evil-mode t)))
 (use-package evil-ediff
   :ensure t)
 (use-package fzf
@@ -98,16 +100,15 @@
             (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)))
 (use-package magit
   :config (progn
-            (setq evil-magit-want-horizontal-movement t)
+            (setq evil-collection-magit-want-horizontal-movement t)
             (setq git-commit-summary-max-length 50)
             (setq magit-fetch-arguments '("--prune"))
-            (use-package evil-magit
-              :ensure t)
+            (use-package evil-collection
+              :after evil
+              :ensure t
+              :config (evil-collection-init))
             (setq magit-completing-read-function 'magit-ido-completing-read
-                  magit-status-buffer-switch-function 'switch-to-buffer)
-            (defun my-magit-section-visibility (section)
-              (and (member (magit-section-type section) '(stashes)) 'hide))
-            (add-hook 'magit-section-set-visibility-hook 'my-magit-section-visibility))
+                  magit-status-buffer-switch-function 'switch-to-buffer))
   :ensure t)
 (use-package nlinum
   :config (global-nlinum-mode t)
