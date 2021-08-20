@@ -16,9 +16,6 @@
 	prompt = false
 [push]
     default = simple
-[user]
-    name = rosston
-    email = ross.brandes@gmai"l.co"m
 [include]
     path = .gitconfig.local
 [includeIf "gitdir:~/src/**"]
