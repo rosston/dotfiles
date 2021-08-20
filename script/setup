@@ -1,0 +1,72 @@
+#!/bin/bash
+
+set -e
+
+[[ -e script/setup ]] || {
+  echo >&2 "Please cd into the dotfiles repo before running this script."
+  exit 1
+}
+
+items_to_link=(
+  ".atom"
+  ".bash_profile"
+  ".bashrc"
+  ".config"
+  ".emacs.d"
+  ".gitconfig"
+  ".inputrc"
+  ".tmux.conf"
+  ".vim"
+  ".vimrc"
+  ".zprofile"
+  ".zshrc"
+)
+
+safely_link () {
+  src=$1
+  dest=$2
+
+  if [ -L "$dest" ]; then
+    rm "$dest"
+  elif [ -e "$dest" ]; then
+    mv "$dest" "${dest}.orig"
+  fi
+
+  ln -s "$src" "$dest"
+}
+
+custom_config () {
+  item="$1"
+
+  case $item in
+    .config)
+      safely_link "${HOME}/.vim" "${HOME}/.config/nvim"
+      ;;
+    .tmux.conf)
+      git clone https://github.com/saysjonathan/dwm.tmux.git /tmp/dwm.tmux
+      cd /tmp/dwm.tmux
+      sudo make
+      cd -
+      rm -rf /tmp/dwm.tmux
+      ;;
+    .vim)
+      autoload_dir="${HOME}/.vim/autoload"
+      if [ ! -d "$autoload_dir" ]; then
+        mkdir "$autoload_dir"
+      fi
+      curl -fLo "${autoload_dir}/plug.vim" \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      ;;
+    *)
+      ;;
+  esac
+}
+
+for item in ${items_to_link[@]}; do
+  src="${PWD}/${item}"
+  dest="$HOME/${item}"
+
+  safely_link $src $dest
+
+  custom_config $item
+done
