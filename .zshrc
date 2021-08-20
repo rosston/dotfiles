@@ -44,15 +44,21 @@ alias weechat="OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES weechat"
 
 export FZF_DEFAULT_COMMAND='ag --hidden -g "" --ignore ".git/" --ignore "bower_components" --ignore "legacy/framework" --ignore "legacy/protected/extensions"'
 
-if type brew &>/dev/null; then
+if command -v brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
-eval "$(nodenv init -)"
+if command -v nodenv &> /dev/null; then
+  eval "$(nodenv init -)"
+fi
 
-eval "$(rbenv init -)"
+if command -v rbenv &> /dev/null; then
+  eval "$(rbenv init -)"
+fi
 
-eval $(thefuck --alias)
+if command -v thefuck &> /dev/null; then
+  eval $(thefuck --alias)
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
