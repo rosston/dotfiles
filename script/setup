@@ -50,6 +50,14 @@ custom_config () {
       rm -rf /tmp/dwm.tmux
       ;;
     .vim)
+      # Set up tmp dir
+      vim_tmp_dir="${HOME}/.vim/tmp"
+      if [ ! -d "$vim_tmp_dir" ]; then
+        mkdir -p "$vim_tmp_dir/backup"
+        mkdir -p "$vim_tmp_dir/swap"
+      fi
+
+      # Install vim-plug
       autoload_dir="${HOME}/.vim/autoload"
       if [ ! -d "$autoload_dir" ]; then
         mkdir "$autoload_dir"
