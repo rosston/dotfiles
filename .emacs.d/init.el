@@ -102,7 +102,6 @@
   :config (progn
             (setq evil-collection-magit-want-horizontal-movement t)
             (setq git-commit-summary-max-length 50)
-            (setq magit-fetch-arguments '("--prune"))
             (add-hook 'git-commit-setup-hook (lambda () (set-fill-column 72)))
             (use-package evil-collection
               :after evil
