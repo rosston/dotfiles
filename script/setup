@@ -50,6 +50,8 @@ install_neovim () {
   ./nvim.appimage --appimage-extract
   rm -rf nvim.appimage
   safely_link "${PWD}/squashfs-root/usr/bin/nvim" "${PWD}/.local/bin/nvim"
+
+  pip3 install pynvim
 }
 
 custom_config () {
