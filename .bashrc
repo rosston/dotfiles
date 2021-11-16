@@ -14,7 +14,7 @@ export EDITOR="$VISUAL"
 
 export PS1="\h:\W \u 🌮  "
 
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH:/Users/ross/.cargo/bin:/Users/ross/.local/bin"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH:${HOME}/.cargo/bin:${HOME}/.local/bin"
 
 alias ag='ag -p ~/.config/ag/agignore'
 alias awake='caffeinate -d'
