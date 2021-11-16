@@ -15,6 +15,7 @@ items_to_link=(
   ".emacs.d"
   ".gitconfig"
   ".inputrc"
+  ".local/bin"
   ".tmux.conf"
   ".vim"
   ".vimrc"
@@ -33,6 +34,22 @@ safely_link () {
   fi
 
   ln -s "$src" "$dest"
+}
+
+safely_mkdir () {
+  dir=$1
+
+  if [ ! -d "$dir" ]; then
+    mkdir "$dir"
+  fi
+}
+
+install_neovim () {
+  curl -fLO https://github.com/neovim/neovim/releases/download/v0.5.1/nvim.appimage
+  chmod u+x nvim.appimage
+  ./nvim.appimage --appimage-extract
+  rm -rf nvim.appimage
+  safely_link "${PWD}/squashfs-root/usr/bin/nvim" "${PWD}/.local/bin/nvim"
 }
 
 custom_config () {
@@ -75,11 +92,19 @@ custom_config () {
       fi
       curl -fLo "${autoload_dir}/plug.vim" \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+      # If in a Codespace, install neovim
+      if [ "$CODESPACES" = "true" ]; then
+        install_neovim
+      fi
       ;;
     *)
       ;;
   esac
 }
+
+# Need to create this early so we can link to .local/bin
+safely_mkdir "${HOME}/.local"
 
 for item in ${items_to_link[@]}; do
   src="${PWD}/${item}"
