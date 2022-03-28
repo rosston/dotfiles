@@ -9,8 +9,7 @@ shopt -s histappend
 shopt -s globstar
 
 # Set editor
-export VISUAL='/usr/local/bin/nvim'
-export EDITOR="$VISUAL"
+export VISUAL=$(which nvim)
 
 export PS1="\h:\W \u 🌮  "
 

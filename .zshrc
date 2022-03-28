@@ -20,8 +20,7 @@ setopt inc_append_history share_history hist_ignore_dups hist_ignore_space
 setopt autocd
 
 # Set editor
-export VISUAL='/usr/local/bin/nvim'
-export EDITOR="$VISUAL"
+export VISUAL=$(which nvim)
 
 export PS1="%m:%1~ %n 🌮  "
 
