@@ -52,6 +52,8 @@ install_neovim () {
   safely_link "${PWD}/squashfs-root/usr/bin/nvim" "${PWD}/.local/bin/nvim"
 
   pip3 install pynvim
+
+  nvim +PlugInstall +qall
 }
 
 custom_config () {
