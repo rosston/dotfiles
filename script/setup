@@ -53,7 +53,7 @@ install_neovim () {
 
   pip3 install pynvim
 
-  nvim +PlugInstall +qall
+  "${PWD}/.local/bin/nvim" +PlugInstall +qall
 }
 
 custom_config () {
