@@ -1,0 +1,30 @@
+#!/bin/bash
+
+repo_name=`basename "$PWD"`
+
+num_panes="$1"
+if [ -z "$num_panes" ]; then
+  num_panes="3"
+fi
+
+times=`expr "$num_panes" - 1`
+
+tmux rename-window "$repo_name"
+
+# Create other panes
+for i in `seq 1 "$times"`; do
+  dwm.tmux newpanecurdir
+done
+
+# Rotate back to the original pane
+dwm.tmux rotatecw
+
+sleep 0.5
+tmux send-keys -t :.0 'nvim' Enter
+
+dwm.tmux rotateccw
+sleep 0.5
+tmux send-keys -t :.0 'emacs -nw -f startup-magit' Enter
+
+dwm.tmux rotatecw
+
