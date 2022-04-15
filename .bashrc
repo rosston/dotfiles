@@ -39,20 +39,17 @@ source_if_present() {
 
 if command -v brew &> /dev/null; then
   brew_prefix=$(brew --prefix)
-
   if [ -f "${brew_prefix}/share/bash-completion/bash_completion" ]; then
       . "${brew_prefix}/share/bash-completion/bash_completion"
       __git_complete g __git_main
   fi
+
+  brew_prefix_asdf=$(brew --prefix asdf)
+
+  source_if_present "${brew_prefix_asdf}/libexec/asdf.sh"
 fi
 
-if command -v nodenv &> /dev/null; then
-  eval "$(nodenv init -)"
-fi
-
-if command -v rbenv &> /dev/null; then
-  eval "$(rbenv init -)"
-fi
+source_if_present "${HOME}/.asdf/plugins/java/set-java-home.bash"
 
 if command -v thefuck &> /dev/null; then
   eval $(thefuck --alias)

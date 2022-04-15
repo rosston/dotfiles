@@ -8,6 +8,7 @@ set -e
 }
 
 items_to_link=(
+  ".asdfrc"
   ".atom"
   ".bash_profile"
   ".bashrc"

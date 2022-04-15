@@ -50,21 +50,20 @@ source_if_present() {
 }
 
 if command -v brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+  brew_prefix=$(brew --prefix)
+  FPATH="${brew_prefix}/share/zsh/site-functions:$FPATH"
+
+  brew_prefix_asdf=$(brew --prefix asdf)
+  source_if_present "${brew_prefix_asdf}/libexec/asdf.sh"
 fi
 
-if command -v nodenv &> /dev/null; then
-  eval "$(nodenv init -)"
-fi
-
-if command -v rbenv &> /dev/null; then
-  eval "$(rbenv init -)"
-fi
+source_if_present "${HOME}/.asdf/plugins/java/set-java-home.zsh"
 
 if command -v thefuck &> /dev/null; then
   eval $(thefuck --alias)
 fi
 
+source_if_present "${HOME}/miniconda3/etc/profile.d/conda.sh"
 source_if_present "${HOME}/.fzf.zsh"
 source_if_present "${HOME}/.zshrc.local"
 
