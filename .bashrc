@@ -31,6 +31,12 @@ alias tmux="env TERM=xterm-256color tmux"
 
 export FZF_DEFAULT_COMMAND='ag --hidden -g "" --ignore ".git/" --ignore "bower_components" --ignore "legacy/framework" --ignore "legacy/protected/extensions"'
 
+source_if_present() {
+  path_to_source=$1
+
+  [ -f "$path_to_source" ] && source "$path_to_source"
+}
+
 if command -v brew &> /dev/null; then
   brew_prefix=$(brew --prefix)
 
@@ -52,6 +58,6 @@ if command -v thefuck &> /dev/null; then
   eval $(thefuck --alias)
 fi
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+source_if_present "${HOME}/.fzf.bash"
 
-[ -f ~/.bashrc.local ] && source ~/.bashrc.local
+source_if_present "${HOME}/.bashrc.local"

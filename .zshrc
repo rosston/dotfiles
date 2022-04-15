@@ -43,6 +43,12 @@ alias weechat="OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES weechat"
 
 export FZF_DEFAULT_COMMAND='ag --hidden -g "" --ignore ".git/" --ignore "bower_components" --ignore "legacy/framework" --ignore "legacy/protected/extensions"'
 
+source_if_present() {
+  path_to_source=$1
+
+  [ -f "$path_to_source" ] && source "$path_to_source"
+}
+
 if command -v brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
@@ -59,9 +65,8 @@ if command -v thefuck &> /dev/null; then
   eval $(thefuck --alias)
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+source_if_present "${HOME}/.fzf.zsh"
+source_if_present "${HOME}/.zshrc.local"
 
 # Load autocompletion, taken from
 # https://gist.github.com/ctechols/ca1035271ad134841284#gistcomment-2767420
