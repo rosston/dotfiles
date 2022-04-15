@@ -1,0 +1,13 @@
+#!/bin/sh
+
+address=`blueutil --paired --format json | jq -r '. | sort_by(.recentAccessDate) | reverse | map(select(.name)) | map(select(.name|test("AirPods"))) | .[0] | .address'`
+
+blueutil --connect "$address"
+
+audio_output=`/usr/local/bin/SwitchAudioSource -a -t output -f cli | grep 'AirPods' | awk -F',' '{print $3}'`
+
+SwitchAudioSource -t output -i "$audio_output"
+
+audio_input=`/usr/local/bin/SwitchAudioSource -a -t input -f cli | grep 'MacBook Pro Microphone' | awk -F',' '{print $3}'`
+
+SwitchAudioSource -t input -i "$audio_input"
