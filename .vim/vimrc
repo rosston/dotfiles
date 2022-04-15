@@ -66,6 +66,11 @@ Plug 'tpope/vim-unimpaired'
 
 call plug#end()
 
+" Set up an augroup for everything to use
+augroup vimrc
+  au!
+augroup END
+
 " Custom load some plugins
 if has('nvim') " Neovim only
     call plug#load('deoplete.nvim')
@@ -77,7 +82,7 @@ if has('nvim') " Neovim only
     \ })
 else " Vim only (not Neovim)
     call plug#load('neocomplete.vim')
-    autocmd InsertEnter * NeoCompleteEnable
+    autocmd vimrc InsertEnter * NeoCompleteEnable
 endif
 if has('gui_running')
     call plug#load('ctrlp.vim')
@@ -265,10 +270,10 @@ endif
 
 " filetype-specific settings {{{
 " Don't treat '-' as a word break character in the CSS language family
-autocmd FileType css,less,sass,scss setlocal iskeyword+=-
+autocmd vimrc FileType css,less,sass,scss setlocal iskeyword+=-
 
 " Force .lfe files to be treated as lisp
-autocmd BufNewFile,BufRead *.lfe set ft=lisp
+autocmd vimrc BufNewFile,BufRead *.lfe set ft=lisp
 " }}}
 
 
@@ -276,9 +281,7 @@ autocmd BufNewFile,BufRead *.lfe set ft=lisp
 if !exists("g:rosston_strip_trailing_whitespace")
   let g:rosston_strip_trailing_whitespace=1
 endif
-augroup StripTrailingWhitespaces
-    autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-augroup END
+autocmd vimrc BufWritePre * :call <SID>StripTrailingWhitespaces()
 " }}}
 
 " Style/theme settings {{{
@@ -341,8 +344,8 @@ call camelcasemotion#CreateMotionMappings('\')
 " vim-indent-guides settings {{{
 let g:indent_guides_guide_size = 1
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#3b5364 ctermbg=3
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3b5364 ctermbg=4
+autocmd vimrc VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#3b5364 ctermbg=3
+autocmd vimrc VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3b5364 ctermbg=4
 " }}}
 
 
@@ -436,9 +439,7 @@ let g:clojure_align_multiline_strings = 1
 " rainbow_parentheses settings {{{
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
-augroup rainbow_lisp
-  autocmd FileType lisp,clojure,scheme RainbowParentheses
-augroup END
+autocmd vimrc FileType lisp,clojure,scheme RainbowParentheses
 " }}}
 
 command CopyPath let @* = expand("%:p") | echo expand("%:p")
