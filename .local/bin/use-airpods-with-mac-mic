@@ -8,6 +8,8 @@ audio_output=`/usr/local/bin/SwitchAudioSource -a -t output -f cli | grep 'AirPo
 
 SwitchAudioSource -t output -i "$audio_output"
 
+sleep 2
+
 audio_input=`/usr/local/bin/SwitchAudioSource -a -t input -f cli | grep 'MacBook Pro Microphone' | awk -F',' '{print $3}'`
 
 SwitchAudioSource -t input -i "$audio_input"
