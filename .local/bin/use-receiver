@@ -4,6 +4,8 @@ address=`blueutil --paired --format json | jq -r '. | sort_by(.recentAccessDate)
 
 blueutil --connect "$address"
 
+sleep 2
+
 audio_source=`/usr/local/bin/SwitchAudioSource -a -t output -f cli | grep 'Music Receiver' | awk -F',' '{print $3}'`
 
 SwitchAudioSource -t output -i "$audio_source"
