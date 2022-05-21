@@ -372,8 +372,11 @@ endif
 
 " FZF settings {{{
 let $FZF_DEFAULT_COMMAND = 'find . ! -wholename "*.DS_Store" ! -wholename "*.git*" ! -wholename "*.hg*" ! -wholename "*.idea*" ! -wholename "*node_modules*"'
-if executable('ag')
-  let $FZF_DEFAULT_COMMAND = 'ag --hidden -g "" --ignore ".git/" --ignore ".hg/"'
+
+if !empty($SSH_REMOTE)
+    let $FZF_DEFAULT_COMMAND = "ssh " . $SSH_REMOTE . " 'cd /workspaces/" . $REPO_NAME . "; find . ! -wholename \"*.DS_Store\" ! -wholename \"*.git*\" ! -wholename \"*.hg*\" ! -wholename \"*.idea*\" ! -wholename \"*node_modules*\"'"
+elseif executable('ag')
+    let $FZF_DEFAULT_COMMAND = 'ag --hidden -g "" --ignore ".git/" --ignore ".hg/"'
 endif
 " }}}
 
