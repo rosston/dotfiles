@@ -4,15 +4,17 @@ set -e
 
 mount_base="${HOME}/codspace"
 
-help () {
+usage () {
   echo "Usage: codspace <subcommand>
 
 Supported subcommands:
     connect
         - mount a codespace and start everything up
-    unmount [--all]
+    umount|unmount [--all]
         - unmount a codespace (from within the sshfs mounted directory)
         - OR unmount all mounted codespaces (from anywhere)
+    wait
+        - show a message and play a bell when a codespace becomes available
 "
   exit 1
 }
@@ -93,24 +95,24 @@ wait_for_startup () {
 }
 
 main () {
-  subcommand="$1"
-  shift
-
-  case "$subcommand" in
+  case "$1" in
     connect)
+      shift
       connect $@
       ;;
     umount|unmount)
+      shift
       unmount $@
       ;;
     wait)
+      shift
       wait_for_startup $@
       ;;
     help)
-      help
+      usage
       ;;
     *)
-      help
+      usage
       ;;
   esac
 }
