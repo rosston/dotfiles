@@ -1,17 +1,19 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
 mount_base="${HOME}/codspace"
 
 help () {
-  echo "Usage: codspace [-u|<repo_name>]"
-  echo ""
-  echo "To mount and start everything up:"
-  echo "    codspace connect"
-  echo ""
-  echo "To unmount (from within the sshfs mounted directory):"
-  echo "    codspace unmount"
+  echo "Usage: codspace <subcommand>
+
+Supported subcommands:
+    connect
+        - mount a codespace and start everything up
+    unmount [--all]
+        - unmount a codespace (from within the sshfs mounted directory)
+        - OR unmount all mounted codespaces (from anywhere)
+"
   exit 1
 }
 
@@ -59,9 +61,18 @@ connect () {
 }
 
 unmount () {
-  local current_mount=$PWD
+  if [ "$1" = "--all" ]; then
+    all_mounts=$(find "$mount_base" -mindepth 1 -maxdepth 1 -printf "%f\n" | grep -v '^\.')
+    for mount in $all_mounts; do
+      fusermount3 -u "${mount_base}/${mount}"
+      rm -r "${mount_base}/${mount}"
+    done
 
-  tmux send-keys -t :.0 "cd .. && fusermount3 -u '$current_mount' && rm -r '$current_mount' && echo 'Unmounted'" Enter
+    echo "Unmounted all sshfs codespaces"
+  else
+    local current_mount=$PWD
+    tmux send-keys -t :.0 "cd .. && fusermount3 -u '$current_mount' && rm -r '$current_mount' && echo 'Unmounted'" Enter
+  fi
   return 0
 }
 
