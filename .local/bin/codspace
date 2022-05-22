@@ -19,10 +19,20 @@ Supported subcommands:
 
 connect () {
   selected_codespace_name=$(gh codespace list | fzf | awk '{ print $1 }')
-  repo_name=$(gh codespace list --json name,repository -q ".[] | select( .name == \"$selected_codespace_name\" ) | .repository" | awk -F "/" '{ print $2 }')
+  selected_codespace_info=$(gh cs ls --json name,repository,state -q ".[] | select( .name == \"$selected_codespace_name\" )")
+
+  repo_name=$(echo "$selected_codespace_info" | jq -r ".repository" | awk -F "/" '{ print $2 }')
+  selected_codespace_state=$(echo "$selected_codespace_info" | jq -r ".state")
+
+  if [ "$selected_codespace_state" = "Shutdown" ]; then
+    echo "Turning stopped codespace back on"
+    gh cs ssh -c "$selected_codespace_name" exit
+  fi
 
   echo "Updating Codespaces SSH config"
-  gh codespace ssh --config > ~/.ssh/codespaces
+  # Exit code is 1 if any of the codespaces are stopped, so ignore errors since
+  # we've already started the particular stopped codespace we care about.
+  gh codespace ssh --config > ~/.ssh/codespaces || true
 
   selected_codespace=$(cat ~/.ssh/codespaces | grep '^Host' | grep "$selected_codespace_name" | sed -e 's/Host //')
   mount_point="${mount_base}/${selected_codespace}"
