@@ -76,6 +76,12 @@ unmount () {
   return 0
 }
 
+wait_for_startup () {
+  codespace=$(gh codespace list | fzf | awk '{ print $1 }')
+
+  watch --beep --errexit "gh codespace list | grep '$codespace' | grep 'Available' && exit 1 || exit 0"
+}
+
 main () {
   subcommand="$1"
   shift
@@ -86,6 +92,9 @@ main () {
       ;;
     umount|unmount)
       unmount $@
+      ;;
+    wait)
+      wait_for_startup $@
       ;;
     help)
       help
