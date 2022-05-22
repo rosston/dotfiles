@@ -13,6 +13,7 @@ brew "tmux"
 brew "the_silver_searcher"
 brew "thefuck"
 brew "vim"
+brew "watch"
 brew "youtube-dl"
 
 # Dependencies for asdf-ruby
