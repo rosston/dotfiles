@@ -1,0 +1,24 @@
+#!/bin/sh
+
+author=$(
+  # Author name and email (in co-authored-by format) for the last 10,000
+  # commits, because active monolith repos can have _a lot_ of commits.
+  git log --pretty=format:"%an <%ae>" -10000 |
+  # Sort to make uniq work
+  sort |
+  # Unique-ify the author list, counting up the occurrences of each (useful
+  # when someone's name or email shows up multiple times and you're not sure
+  # which name/email combo to use).
+  uniq -c |
+  # Sort author list by occurrences of author name/email combo, descending
+  sort -rnk1 |
+  # Show it all in fzf so we can easily pick one
+  fzf |
+  # Take off the leading space(s) and number(s) that show the count of
+  # occurrences. \s doesn't seem to work in macOS, even with -E, so let's just
+  # use POSIX character classes.
+  sed 's/^[[:space:]]*[[:digit:]]*[[:space:]]*//g'
+)
+
+printf "Co-authored-by: %s" "$author" | pbcopy
+
