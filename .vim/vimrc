@@ -458,7 +458,7 @@ fun! <SID>RunProjectCommand(args)
 endfun
 
 fun! <SID>StripTrailingWhitespaces()
-  if g:rosston_strip_trailing_whitespace == 1
+  if g:rosston_strip_trailing_whitespace == 1 && &filetype != 'markdown'
     let l = line(".")
     let c = col(".")
     %s/\s\+$//e
