@@ -2,19 +2,22 @@
 brew "asdf"
 brew "blueutil"
 brew "emacs"
-brew "ffmpeg"
+brew "gh"
 brew "git"
 brew "mercurial"
 brew "mosh"
-brew "mpv"
 brew "neovim"
 brew "overmind"
+brew "switchaudio-osx"
 brew "tmux"
 brew "the_silver_searcher"
 brew "thefuck"
 brew "vim"
 brew "watch"
-brew "youtube-dl"
+
+# Dependencies for clojurescript.csv
+brew "leiningen"
+cask "phantomjs"
 
 # Dependencies for asdf-ruby
 brew "openssl"
