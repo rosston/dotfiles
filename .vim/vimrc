@@ -27,6 +27,7 @@ Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
 Plug 'kovisoft/paredit', { 'on': [] }
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'rust-lang/rust.vim'
+Plug 'hwayne/tla.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-abolish'
