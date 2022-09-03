@@ -2,15 +2,14 @@
 
 Table of contents:
 1. early_setup
-2. setup_plugins
+2. set_up_plugins
 3. editing_behavior
 4. editor_layout
 5. vim_behavior
 6. shortcut_mappings
 7. filetype_settings
 8. strip_trailing_whitespace
-9. plugin_settings
-10. custom_commands
+9. custom_commands
 
 --]]
 
@@ -23,9 +22,110 @@ local vimrc_augroup = vim.api.nvim_create_augroup("vimrc", { clear = true })
 
 -- }}}
 
--- setup_plugins {{{
+-- set_up_plugins {{{
 
--- TODO: add plugin manager and load plugins
+require("packer").startup(function(use)
+	-- Packer can manage itself
+	use("wbthomason/packer.nvim")
+
+	use({
+		"mileszs/ack.vim",
+		config = function()
+			if vim.fn.executable("ag") then
+				vim.g.ackprg = "ag --vimgrep"
+			end
+		end,
+	})
+	use({
+		"bkad/CamelCaseMotion",
+		config = function()
+			vim.g.camelcasemotion_key = "\\"
+		end,
+	})
+	use({
+		"lalitmee/cobalt2.nvim",
+		requires = "tjdevries/colorbuddy.nvim",
+		config = function()
+			require("colorbuddy").colorscheme("cobalt2")
+
+			-- Make the wrap guide a sensible color
+			vim.cmd("highlight ColorColumn ctermbg=lightgrey guibg=#3b5364")
+		end,
+	})
+	use({
+		"junegunn/fzf.vim",
+		config = function()
+			vim.g.fzf_layout = { down = "33%" }
+			vim.g.fzf_preview_window = { "right:50%:hidden", "ctrl-/" }
+
+			vim.keymap.set(
+				"n",
+				"<Leader>pf",
+				":exe 'Files " .. vim.fn["projectroot#guess"]() .. "' <CR>",
+				{ silent = true }
+			)
+			vim.keymap.set("n", "<Leader>bb", ":Buffers<CR>", { silent = true })
+
+			vim.cmd([[
+        let $FZF_DEFAULT_COMMAND = 'find . ! -wholename "*.DS_Store" ! -wholename "*.git*" ! -wholename "*.hg*" ! -wholename "*.idea*" ! -wholename "*node_modules*"'
+
+        if !empty($SSH_REMOTE)
+            let $FZF_DEFAULT_COMMAND = "ssh " . $SSH_REMOTE . " 'cd /workspaces/" . $REPO_NAME . "; find . ! -wholename \"*.DS_Store\" ! -wholename \"*.git*\" ! -wholename \"*.hg*\" ! -wholename \"*.idea*\" ! -wholename \"*node_modules*\"'"
+        elseif executable('ag')
+            let $FZF_DEFAULT_COMMAND = 'ag --hidden -g "" --ignore ".git/" --ignore ".hg/"'
+        endif
+      ]])
+		end,
+		requires = { HOME .. "/.fzf", as = "fzf" },
+	})
+	use({
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+		end,
+		tag = "release",
+	})
+	use({
+		"nvim-lualine/lualine.nvim",
+		config = function()
+			require("lualine").setup({
+				options = {
+					icons_enabled = false,
+				},
+				tabline = {
+					lualine_a = { { "buffers", show_filename_only = false, mode = 4 } },
+				},
+			})
+		end,
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+	})
+	use({
+		"klen/nvim-config-local",
+		config = function()
+			require("config-local").setup()
+		end,
+	})
+	use("tpope/vim-abolish")
+	use("moll/vim-bbye")
+	use("tpope/vim-capslock")
+	use("tpope/vim-commentary")
+	use("tommcdo/vim-exchange")
+	use({ "tpope/vim-fireplace", ft = "clojure" })
+	use("tpope/vim-fugitive")
+	use("tpope/vim-git")
+	use("tpope/vim-obsession")
+	use("dbakker/vim-projectroot")
+	use({
+		"justinmk/vim-sneak",
+		config = function()
+			vim.g["sneak#label"] = 1
+		end,
+	})
+	use({ "tpope/vim-surround" })
+	use("thinca/vim-textobj-between")
+	use({ "nelstrom/vim-textobj-rubyblock", requires = "kana/vim-textobj-user" })
+	use("tpope/vim-unimpaired")
+end)
 
 -- }}}
 
@@ -88,6 +188,12 @@ vim.opt.ruler = true -- enable line/col numbers in status bar
 
 -- vim_behavior {{{
 
+-- Change to the directory of the current buffer
+vim.opt.autochdir = true
+
+-- Set list style for netrw
+vim.g.netrw_liststyle = 3
+
 -- Turn on omni completion
 vim.opt.omnifunc = "syntaxcomplete#Complete"
 
@@ -149,7 +255,7 @@ vim.keymap.set({ "n", "v" }, "/", "/\\v")
 -- Don't require the Shift key to form chords to enter ex mode.
 vim.keymap.set("n", ";", ":")
 -- Remap old behavior of ; (repeat last f, F, t, or T command) to <leader>;
--- TODO: map <leader>; <Plug>Sneak_;
+vim.keymap.set("", "<Leader>;", "<Plug>Sneak_;", { remap = true })
 
 -- Remap j and k to act as expected when used on long, wrapped, lines
 vim.keymap.set("n", "j", "gj")
@@ -181,7 +287,7 @@ vim.keymap.set("n", "<Leader>sap", ':ProjectRootExe Ack! ""<left>')
 vim.keymap.set("n", "<Leader>yp", ":CopyPath<CR>")
 
 -- git shortcuts
-vim.keymap.set("n", "<Leader>gs", ":Gstatus<CR>")
+vim.keymap.set("n", "<Leader>gs", ":Git<CR>")
 vim.keymap.set("n", "<Leader>gb", ":Git blame<CR>")
 
 -- jump to buffer by number
@@ -238,10 +344,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	group = vimrc_augroup,
 	pattern = { "*" },
 })
-
--- }}}
-
--- plugin_settings {{{
 
 -- }}}
 
