@@ -3,13 +3,14 @@
 Table of contents:
 1. early_setup
 2. set_up_plugins
-3. editing_behavior
-4. editor_layout
-5. vim_behavior
-6. shortcut_mappings
-7. filetype_settings
-8. strip_trailing_whitespace
-9. custom_commands
+3. lsp_setup
+4. editing_behavior
+5. editor_layout
+6. vim_behavior
+7. shortcut_mappings
+8. filetype_settings
+9. strip_trailing_whitespace
+10. custom_commands
 
 --]]
 
@@ -28,6 +29,39 @@ require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 
+	-- LSP things
+	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/nvim-cmp")
+	use("neovim/nvim-lspconfig")
+	use({
+		"jose-elias-alvarez/null-ls.nvim",
+		config = function()
+			local null_ls = require("null-ls")
+			local lsp_format_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
+			null_ls.setup({
+				on_attach = function(client, bufnr)
+					if client.supports_method("textDocument/formatting") then
+						vim.api.nvim_clear_autocmds({ group = lsp_format_augroup, buffer = bufnr })
+						vim.api.nvim_create_autocmd("BufWritePre", {
+							group = lsp_format_augroup,
+							buffer = bufnr,
+							callback = function()
+								-- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+								vim.lsp.buf.formatting_sync()
+							end,
+						})
+					end
+				end,
+				sources = {
+					null_ls.builtins.formatting.stylua,
+				},
+			})
+		end,
+		requires = "nvim-lua/plenary.nvim",
+	})
+
+	-- Everything else
 	use({
 		"mileszs/ack.vim",
 		config = function()
@@ -130,6 +164,38 @@ require("packer").startup(function(use)
 	use({ "nelstrom/vim-textobj-rubyblock", requires = "kana/vim-textobj-user" })
 	use("tpope/vim-unimpaired")
 end)
+
+-- }}}
+
+-- lsp_setup {{{
+
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+
+local lspconfig = require("lspconfig")
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+	local bufopts = { noremap = true, silent = true, buffer = bufnr }
+	vim.keymap.set("n", "<Leader>mgt", vim.lsp.buf.definition, bufopts)
+end
+
+local servers = { "solargraph", "tsserver" }
+for _, lsp in ipairs(servers) do
+	lspconfig[lsp].setup({
+		on_attach = on_attach,
+		capabilities = capabilities,
+	})
+end
+
+local cmp = require("cmp")
+cmp.setup({
+	sources = {
+		{ name = "nvim_lsp" },
+	},
+})
 
 -- }}}
 
