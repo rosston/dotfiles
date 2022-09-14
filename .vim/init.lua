@@ -175,11 +175,23 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 local lspconfig = require("lspconfig")
 
+-- Keybindings copied from Spacemacs' LSP layer
+local opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<Leader>mge", vim.diagnostic.setloclist, opts)
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+	-- Keybindings copied from Spacemacs' LSP layer
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	vim.keymap.set("n", "<Leader>mgt", vim.lsp.buf.definition, bufopts)
+	vim.keymap.set("n", "<Leader>m=b", vim.lsp.buf.formatting, bufopts)
+	vim.keymap.set("n", "<Leader>maa", vim.lsp.buf.code_action, bufopts)
+	vim.keymap.set("n", "<Leader>mgd", vim.lsp.buf.definition, bufopts)
+	vim.keymap.set("n", "<Leader>mgi", vim.lsp.buf.implementation, bufopts)
+	vim.keymap.set("n", "<Leader>mgt", vim.lsp.buf.type_definition, bufopts)
+	vim.keymap.set("n", "<Leader>mgr", vim.lsp.buf.references, bufopts)
+	vim.keymap.set("n", "<Leader>mrr", vim.lsp.buf.rename, bufopts)
+	vim.keymap.set("n", "<Leader>mTlF", vim.lsp.buf.signature_help, bufopts)
 end
 
 local servers = { "solargraph", "tsserver" }
