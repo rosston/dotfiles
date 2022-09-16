@@ -31,6 +31,12 @@ require("packer").startup(function(use)
 
 	-- LSP things
 	use("hrsh7th/cmp-nvim-lsp")
+	use({
+		"lukas-reineke/lsp-format.nvim",
+		config = function()
+			require("lsp-format").setup({ exclude = { "solargraph" } })
+		end,
+	})
 	use("hrsh7th/nvim-cmp")
 	use("neovim/nvim-lspconfig")
 	use({
@@ -40,19 +46,7 @@ require("packer").startup(function(use)
 			local lsp_format_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 			null_ls.setup({
-				on_attach = function(client, bufnr)
-					if client.supports_method("textDocument/formatting") then
-						vim.api.nvim_clear_autocmds({ group = lsp_format_augroup, buffer = bufnr })
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							group = lsp_format_augroup,
-							buffer = bufnr,
-							callback = function()
-								-- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-								vim.lsp.buf.formatting_sync()
-							end,
-						})
-					end
-				end,
+				on_attach = require("lsp-format").on_attach,
 				sources = {
 					null_ls.builtins.diagnostics.rubocop,
 					null_ls.builtins.formatting.rubocop,
@@ -184,6 +178,8 @@ vim.keymap.set("n", "<Leader>mge", vim.diagnostic.setloclist, opts)
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+	require("lsp-format").on_attach(client)
+
 	-- Keybindings copied from Spacemacs' LSP layer
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	vim.keymap.set("n", "<Leader>m=b", vim.lsp.buf.formatting, bufopts)
