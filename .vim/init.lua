@@ -429,7 +429,18 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 -- custom_commands {{{
 
-vim.api.nvim_create_user_command("CopyPath", 'let @* = expand("%:p") | echo expand("%:p")', {})
+local function copy_file_path()
+	full_path = vim.fn.expand("%:p")
+	project_root = vim.fn["projectroot#get"](full_path)
+	-- Escape all the non-alphanumeric characters to treat this as a literal
+	-- string.
+	escaped_project_root = project_root:gsub("([^%w])", "%%%1")
+	relative_path = full_path:gsub(escaped_project_root, ""):sub(2)
+
+	vim.fn.setreg("*", relative_path)
+	print(relative_path)
+end
+vim.api.nvim_create_user_command("CopyPath", copy_file_path, {})
 vim.api.nvim_create_user_command("PrettyJSON", "%!python -m json.tool", {})
 vim.api.nvim_create_user_command("Session", ":exe 'Obsession' projectroot#guess()", {})
 
