@@ -48,8 +48,14 @@ require("packer").startup(function(use)
 			null_ls.setup({
 				on_attach = require("lsp-format").on_attach,
 				sources = {
-					null_ls.builtins.diagnostics.rubocop,
-					null_ls.builtins.formatting.rubocop,
+					null_ls.builtins.diagnostics.rubocop.with({
+						command = "bundle",
+						args = vim.list_extend({ "exec", "rubocop" }, null_ls.builtins.diagnostics.rubocop._opts.args),
+					}),
+					null_ls.builtins.formatting.rubocop.with({
+						command = "bundle",
+						args = vim.list_extend({ "exec", "rubocop" }, null_ls.builtins.formatting.rubocop._opts.args),
+					}),
 					null_ls.builtins.formatting.stylua,
 				},
 			})
