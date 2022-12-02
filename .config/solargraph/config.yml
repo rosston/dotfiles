@@ -1,0 +1,19 @@
+---
+include:
+- "**/*.rb"
+exclude:
+- spec/**/*
+- test/**/*
+- vendor/**/*
+- ".bundle/**/*"
+require: []
+domains: []
+reporters:
+## Always exclude rubocop as a reporter via solargraph
+- require_not_found
+formatter:
+  rubocop:
+    only: ["Lint/AmbiguousOperator"]
+require_paths: []
+plugins: []
+max_files: 5000
