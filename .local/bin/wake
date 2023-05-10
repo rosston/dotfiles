@@ -1,0 +1,77 @@
+#!/bin/bash
+
+set -e
+
+usage () {
+  echo "Usage: wake [-d] [-h|--help] [utility arguments...]
+
+By default, wake only prevents system sleep, ignoring the display.
+
+If a utility with arguments is provided, that command will be run with
+sleep (display or system) prevented until it completes. If no utility is
+provided, sleep is prevented until the process is exited with ctrl-c.
+
+Key
+    -h / --help    Show this screen
+    -d             Prevent the display from sleeping
+"
+  exit 1
+}
+
+main () {
+  local wake_mode="prevent_system_sleep"
+
+  case "$1" in
+    "-d")
+      wake_mode="prevent_display_sleep"
+      shift
+      ;;
+    "--help")
+      usage
+      ;;
+    "-h")
+      usage
+      ;;
+    *)
+      ;;
+  esac
+
+  local cmd_to_run="$*"
+
+  if command -v caffeinate &>/dev/null; then
+    local caffeinate_arg=""
+    case "$wake_mode" in
+      "prevent_system_sleep")
+        caffeinate_arg="-i"
+        ;;
+      "prevent_display_sleep")
+        caffeinate_arg="-d"
+        ;;
+    esac
+
+    caffeinate $caffeinate_arg $cmd_to_run
+  elif command -v gnome-session-inhibit &>/dev/null; then
+    local gnome_inhibit_arg=""
+    case "$wake_mode" in
+      "prevent_system_sleep")
+        gnome_inhibit_arg="suspend"
+        ;;
+      "prevent_display_sleep")
+        gnome_inhibit_arg="idle"
+        ;;
+    esac
+
+    if [ -z "$cmd_to_run" ]; then
+      cmd_to_run="--inhibit-only"
+    fi
+
+    gnome-session-inhibit --inhibit $gnome_inhibit_arg $cmd_to_run
+  else
+    echo "Missing a wakeful command. Supported commands:
+    - caffeinate (macOS)
+    - gnome-session-inhibit (Gnome)"
+    exit 1
+  fi
+}
+
+main $@
