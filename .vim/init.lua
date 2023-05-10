@@ -193,7 +193,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		-- Keybindings copied from Spacemacs' LSP layer
 		local bufopts = { noremap = true, silent = true, buffer = args.buffer }
-		vim.keymap.set("n", "<Leader>m=b", vim.lsp.buf.format, bufopts)
+		vim.keymap.set("n", "<Leader>m=b", function()
+			vim.lsp.buf.format({ timeout_ms = 5000 })
+		end, bufopts)
 		vim.keymap.set("n", "<Leader>maa", vim.lsp.buf.code_action, bufopts)
 		vim.keymap.set("n", "<Leader>mgd", vim.lsp.buf.definition, bufopts)
 		vim.keymap.set("n", "<Leader>mgi", vim.lsp.buf.implementation, bufopts)
