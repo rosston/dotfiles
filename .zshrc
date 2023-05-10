@@ -56,6 +56,7 @@ if command -v brew &>/dev/null; then
   source_if_present "${brew_prefix_asdf}/libexec/asdf.sh"
 fi
 
+source_if_present "${HOME}/.asdf/asdf.sh"
 source_if_present "${HOME}/.asdf/plugins/java/set-java-home.zsh"
 
 if command -v thefuck &> /dev/null; then
