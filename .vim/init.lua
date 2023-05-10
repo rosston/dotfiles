@@ -183,10 +183,6 @@ cmp.setup({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
--- Keybindings copied from Spacemacs' LSP layer
-local opts = { noremap = true, silent = true }
-vim.keymap.set("n", "<Leader>mge", vim.diagnostic.setloclist, opts)
-
 -- Use LspAttach to only map the following keys after the language server
 -- attaches to the current buffer.
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -336,6 +332,12 @@ vim.opt.inccommand = "split"
 vim.g.mapleader = " "
 
 vim.cmd("source ~/.vim/visual-at.vim")
+
+-- LSP keybindings (must happen after declaring mapleader). Keybindings copied
+-- from Spacemacs' LSP layer.
+local opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<Leader>ex", vim.diagnostic.open_float, opts)
+vim.keymap.set("n", "<Leader>mge", vim.diagnostic.setloclist, opts)
 
 -- Fix Vim’s horribly broken default regex “handling” by automatically
 -- inserting a \v before any string you search for.
