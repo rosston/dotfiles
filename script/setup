@@ -46,7 +46,7 @@ safely_mkdir () {
 }
 
 install_neovim () {
-  curl -fLO https://github.com/neovim/neovim/releases/download/v0.5.1/nvim.appimage
+  curl -fLO https://github.com/neovim/neovim/releases/download/v0.10.1/nvim.appimage
   chmod u+x nvim.appimage
   ./nvim.appimage --appimage-extract
   rm -rf nvim.appimage
