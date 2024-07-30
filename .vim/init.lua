@@ -112,7 +112,7 @@ require("packer").startup(function(use)
         endif
       ]])
 		end,
-		requires = { HOME .. "/.fzf", as = "fzf" },
+		requires = { "junegunn/fzf", run = ":call fzf#install()" },
 	})
 	use({
 		"lewis6991/gitsigns.nvim",
