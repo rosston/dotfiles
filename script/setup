@@ -54,7 +54,7 @@ install_neovim () {
 
   pip3 install pynvim
 
-  "${PWD}/.local/bin/nvim" +PlugInstall +UpdateRemotePlugins +qall
+  "${PWD}/.local/bin/nvim" +PackerSync +UpdateRemotePlugins +qall
 }
 
 custom_config () {
