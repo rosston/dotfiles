@@ -80,7 +80,7 @@ require("packer").startup(function(use)
 	})
 	use({
 		"lalitmee/cobalt2.nvim",
-		requires = "tjdevries/colorbuddy.nvim",
+		requires = { { "tjdevries/colorbuddy.nvim", tag = "v1.0.0" } },
 		config = function()
 			require("colorbuddy").colorscheme("cobalt2")
 
