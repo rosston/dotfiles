@@ -36,6 +36,7 @@ source_if_present() {
   [ -f "$path_to_source" ] && source "$path_to_source"
 }
 
+export ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY="latest_installed"
 if command -v brew &> /dev/null; then
   brew_prefix=$(brew --prefix)
   if [ -f "${brew_prefix}/share/bash-completion/bash_completion" ]; then
