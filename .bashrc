@@ -13,7 +13,7 @@ export VISUAL=$(which nvim)
 
 export PS1="\h:\W \u 🌮  "
 
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH:${HOME}/.cargo/bin:${HOME}/.local/bin"
+export PATH="/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH:${HOME}/.cargo/bin:${HOME}/.local/bin"
 
 alias ag='ag -p ~/.config/ag/agignore'
 alias awake='caffeinate -d'
