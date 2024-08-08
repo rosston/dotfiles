@@ -1,11 +1,11 @@
 #!/bin/sh
 
-address=`blueutil --paired --format json | jq -r '. | sort_by(.recentAccessDate) | reverse | map(select(.name)) | map(select(.name|test("Music Receiver"))) | .[0] | .address'`
+address=`blueutil --paired --format json | jq -r '. | sort_by(.recentAccessDate) | reverse | map(select(.name)) | map(select(.name|test("Office"))) | .[0] | .address'`
 
 blueutil --connect "$address"
 
 sleep 2
 
-audio_source=`/usr/local/bin/SwitchAudioSource -a -t output -f cli | grep 'Music Receiver' | awk -F',' '{print $3}'`
+audio_source=`SwitchAudioSource -a -t output -f cli | grep 'Office' | awk -F',' '{print $3}'`
 
 SwitchAudioSource -t output -i "$audio_source"
