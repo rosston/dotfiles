@@ -72,8 +72,6 @@
   :init (progn
           (setq evil-want-keybinding nil)
           (evil-mode t)))
-(use-package evil-ediff
-  :ensure t)
 (use-package fzf
   :config (setq fzf/args "--no-hscroll --margin=0,1,1,0")
   :ensure t)
