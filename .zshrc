@@ -63,6 +63,9 @@ source_if_present "${HOME}/.asdf/plugins/java/set-java-home.zsh"
 if command -v thefuck &> /dev/null; then
   eval $(thefuck --alias)
 fi
+if command -v fzf &> /dev/null; then
+  source <(fzf --zsh)
+fi
 
 source_if_present "${HOME}/miniconda3/etc/profile.d/conda.sh"
 source_if_present "${HOME}/.fzf.zsh"
