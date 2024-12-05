@@ -231,7 +231,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-local servers = { "solargraph", "tsserver" }
+local servers = { "solargraph", "ts_ls" }
 local lspconfig = require("lspconfig")
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
