@@ -25,172 +25,237 @@ local vimrc_augroup = vim.api.nvim_create_augroup("vimrc", { clear = true })
 
 -- set_up_plugins {{{
 
-require("packer").startup(function(use)
-	-- Packer can manage itself
-	use("wbthomason/packer.nvim")
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+	if vim.v.shell_error ~= 0 then
+		vim.api.nvim_echo({
+			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+			{ out, "WarningMsg" },
+			{ "\nPress any key to exit..." },
+		}, true, {})
+		vim.fn.getchar()
+		os.exit(1)
+	end
+end
+vim.opt.rtp:prepend(lazypath)
 
-	-- LSP things
-	use("hrsh7th/cmp-nvim-lsp")
-	use({
-		"lukas-reineke/lsp-format.nvim",
-		config = function()
-			require("lsp-format").setup({ exclude = { "solargraph" } })
-		end,
-	})
-	use("hrsh7th/nvim-cmp")
-	use("neovim/nvim-lspconfig")
-	use({
-		"jose-elias-alvarez/null-ls.nvim",
-		config = function()
-			local null_ls = require("null-ls")
-			local lsp_format_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+-- Make sure to set up `mapleader` and `maplocalleader` before loading
+-- lazy.nvim so that mappings are correct.
+--
+-- Set space as mapleader
+vim.g.mapleader = " "
 
-			null_ls.setup({
-				on_attach = require("lsp-format").on_attach,
-				sources = {
-					null_ls.builtins.diagnostics.rubocop.with({
-						command = "bundle",
-						args = vim.list_extend({ "exec", "rubocop" }, null_ls.builtins.diagnostics.rubocop._opts.args),
-					}),
-					null_ls.builtins.formatting.rubocop.with({
-						command = "bundle",
-						args = vim.list_extend({ "exec", "rubocop" }, null_ls.builtins.formatting.rubocop._opts.args),
-					}),
-					null_ls.builtins.formatting.stylua,
-				},
-			})
-		end,
-		requires = "nvim-lua/plenary.nvim",
-	})
+-- Set up lazy.nvim
+require("lazy").setup({
+	-- Override icons so that we don't need to use a nerd font
+	ui = {
+		icons = {
+			cmd = "⌘",
+			config = "🛠",
+			event = "📅",
+			ft = "📂",
+			init = "⚙",
+			keys = "🗝",
+			plugin = "🔌",
+			runtime = "💻",
+			require = "🌙",
+			source = "📄",
+			start = "🚀",
+			task = "📌",
+			lazy = "💤 ",
+		},
+	},
+	rocks = {
+		-- Disable rockspec sources so I don't need luarocks
+		enabled = false,
+	},
+	spec = {
+		-- the colorscheme should be available when starting Neovim
+		{
+			"lalitmee/cobalt2.nvim",
+			lazy = false,
+			priority = 1000, -- load this before all the other start plugins
+			dependencies = {
+				{ "tjdevries/colorbuddy.nvim", tag = "v1.0.0" },
+			},
+			config = function()
+				-- load the colorscheme here
+				require("colorbuddy").colorscheme("cobalt2")
 
-	-- Everything else
-	use({
-		"mileszs/ack.vim",
-		config = function()
-			if vim.fn.executable("ag") then
-				vim.g.ackprg = "ag --vimgrep"
-			end
-		end,
-	})
-	use({
-		"bkad/CamelCaseMotion",
-		config = function()
-			vim.g.camelcasemotion_key = "\\"
-		end,
-	})
-	use({
-		"lalitmee/cobalt2.nvim",
-		requires = { { "tjdevries/colorbuddy.nvim", tag = "v1.0.0" } },
-		config = function()
-			require("colorbuddy").colorscheme("cobalt2")
+				-- Make the wrap guide a sensible color
+				vim.cmd("highlight ColorColumn ctermbg=lightgrey guibg=#3b5364")
+			end,
+		},
 
-			-- Make the wrap guide a sensible color
-			vim.cmd("highlight ColorColumn ctermbg=lightgrey guibg=#3b5364")
-		end,
-	})
-	use({
-		"junegunn/fzf.vim",
-		config = function()
-			vim.g.fzf_layout = { down = "33%" }
-			vim.g.fzf_preview_window = { "right:50%:hidden", "ctrl-/" }
+		-- LSP things
+		{ "hrsh7th/cmp-nvim-lsp" },
+		{
+			"lukas-reineke/lsp-format.nvim",
+			config = function()
+				require("lsp-format").setup({ exclude = { "solargraph" } })
+			end,
+		},
+		{ "hrsh7th/nvim-cmp" },
+		{ "neovim/nvim-lspconfig" },
+		{
+			"jose-elias-alvarez/null-ls.nvim",
+			dependencies = { "nvim-lua/plenary.nvim" },
+			config = function()
+				local null_ls = require("null-ls")
+				local lsp_format_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-			vim.keymap.set(
-				"n",
-				"<Leader>pf",
-				":exe 'Files " .. vim.fn["projectroot#guess"]() .. "' <CR>",
-				{ silent = true }
-			)
-			vim.keymap.set("n", "<Leader>bb", ":Buffers<CR>", { silent = true })
+				null_ls.setup({
+					on_attach = require("lsp-format").on_attach,
+					sources = {
+						null_ls.builtins.diagnostics.rubocop.with({
+							command = "bundle",
+							args = vim.list_extend(
+								{ "exec", "rubocop" },
+								null_ls.builtins.diagnostics.rubocop._opts.args
+							),
+						}),
+						null_ls.builtins.formatting.rubocop.with({
+							command = "bundle",
+							args = vim.list_extend(
+								{ "exec", "rubocop" },
+								null_ls.builtins.formatting.rubocop._opts.args
+							),
+						}),
+						null_ls.builtins.formatting.stylua,
+					},
+				})
+			end,
+		},
 
-			vim.cmd([[
+		-- Everything else
+		{
+			"mileszs/ack.vim",
+			init = function()
+				if vim.fn.executable("ag") then
+					vim.g.ackprg = "ag --vimgrep"
+				end
+			end,
+		},
+		{
+			"bkad/CamelCaseMotion",
+			config = function()
+				vim.g.camelcasemotion_key = "\\"
+			end,
+		},
+		{
+			"junegunn/fzf.vim",
+			dependencies = {
+				{ "junegunn/fzf", build = ":call fzf#install()" },
+				{ "dbakker/vim-projectroot" },
+			},
+			config = function()
+				vim.g.fzf_layout = { down = "33%" }
+				vim.g.fzf_preview_window = { "right:50%:hidden", "ctrl-/" }
+
+				vim.keymap.set(
+					"n",
+					"<Leader>pf",
+					":exe 'Files " .. vim.fn["projectroot#guess"]() .. "' <CR>",
+					{ silent = true }
+				)
+				vim.keymap.set("n", "<Leader>bb", ":Buffers<CR>", { silent = true })
+
+				vim.cmd([[
         let $FZF_DEFAULT_COMMAND = 'find . ! -wholename "*.DS_Store" ! -wholename "*.git*" ! -wholename "*.hg*" ! -wholename "*.idea*" ! -wholename "*node_modules*"'
 
         if !empty($SSH_REMOTE)
-            let $FZF_DEFAULT_COMMAND = "ssh " . $SSH_REMOTE . " 'cd /workspaces/" . $REPO_NAME . "; find . ! -wholename \"*.DS_Store\" ! -wholename \"*.git*\" ! -wholename \"*.hg*\" ! -wholename \"*.idea*\" ! -wholename \"*node_modules*\"'"
+          let $FZF_DEFAULT_COMMAND = "ssh " . $SSH_REMOTE . " 'cd /workspaces/" . $REPO_NAME . "; find . ! -wholename \"*.DS_Store\" ! -wholename \"*.git*\" ! -wholename \"*.hg*\" ! -wholename \"*.idea*\" ! -wholename \"*node_modules*\"'"
         elseif executable('ag')
-            let $FZF_DEFAULT_COMMAND = 'ag --hidden -g "" --ignore ".git/" --ignore ".hg/"'
-        endif
-      ]])
-		end,
-		requires = { "junegunn/fzf", run = ":call fzf#install()" },
-	})
-	use({
-		"lewis6991/gitsigns.nvim",
-		config = function()
-			require("gitsigns").setup({
-				on_attach = function(bufnr)
-					local gs = package.loaded.gitsigns
+          let $FZF_DEFAULT_COMMAND = 'ag --hidden -g "" --ignore ".git/" --ignore ".hg/"'
+          endif
+          ]])
+			end,
+		},
+		{
+			"lewis6991/gitsigns.nvim",
+			config = function()
+				require("gitsigns").setup({
+					on_attach = function(bufnr)
+						local gs = package.loaded.gitsigns
 
-					-- Navigation
-					vim.keymap.set("n", "]c", function()
-						if vim.wo.diff then
-							return "]c"
-						end
-						vim.schedule(function()
-							gs.next_hunk()
-						end)
-						return "<Ignore>"
-					end, { buffer = bufnr, expr = true })
+						-- Navigation
+						vim.keymap.set("n", "]c", function()
+							if vim.wo.diff then
+								return "]c"
+							end
+							vim.schedule(function()
+								gs.next_hunk()
+							end)
+							return "<Ignore>"
+						end, { buffer = bufnr, expr = true })
 
-					vim.keymap.set("n", "[c", function()
-						if vim.wo.diff then
-							return "[c"
-						end
-						vim.schedule(function()
-							gs.prev_hunk()
-						end)
-						return "<Ignore>"
-					end, { buffer = bufnr, expr = true })
-				end,
-			})
-		end,
-		tag = "release",
-	})
-	use({
-		"nvim-lualine/lualine.nvim",
-		config = function()
-			require("lualine").setup({
-				options = {
-					icons_enabled = false,
-				},
-				tabline = {
-					lualine_a = { { "buffers", show_filename_only = false, mode = 4 } },
-				},
-			})
-		end,
-		requires = { "kyazdani42/nvim-web-devicons", opt = true },
-	})
-	use({
-		"klen/nvim-config-local",
-		config = function()
-			require("config-local").setup()
-		end,
-	})
-	use("hwayne/tla.vim")
-	use("tpope/vim-abolish")
-	use("moll/vim-bbye")
-	use("tpope/vim-capslock")
-	use("kchmck/vim-coffee-script")
-	use("tpope/vim-commentary")
-	use("tommcdo/vim-exchange")
-	use("tpope/vim-fugitive")
-	use("tpope/vim-git")
-	use("jparise/vim-graphql")
-	use("lfe-support/vim-lfe")
-	use("tpope/vim-obsession")
-	use("dbakker/vim-projectroot")
-	use("digitaltoad/vim-pug")
-	use({
-		"justinmk/vim-sneak",
-		config = function()
-			vim.g["sneak#label"] = 1
-		end,
-	})
-	use({ "tpope/vim-surround" })
-	use("thinca/vim-textobj-between")
-	use({ "nelstrom/vim-textobj-rubyblock", requires = "kana/vim-textobj-user" })
-	use("tpope/vim-unimpaired")
-end)
+						vim.keymap.set("n", "[c", function()
+							if vim.wo.diff then
+								return "[c"
+							end
+							vim.schedule(function()
+								gs.prev_hunk()
+							end)
+							return "<Ignore>"
+						end, { buffer = bufnr, expr = true })
+					end,
+				})
+			end,
+		},
+		{
+			"nvim-lualine/lualine.nvim",
+			dependencies = {
+				{ "kyazdani42/nvim-web-devicons", lazy = true },
+			},
+			config = function()
+				require("lualine").setup({
+					options = {
+						icons_enabled = false,
+					},
+					tabline = {
+						lualine_a = { { "buffers", show_filename_only = false, mode = 4 } },
+					},
+				})
+			end,
+		},
+		{
+			"klen/nvim-config-local",
+			config = function()
+				require("config-local").setup()
+			end,
+		},
+		{ "hwayne/tla.vim" },
+		{ "tpope/vim-abolish" },
+		{ "moll/vim-bbye" },
+		{ "tpope/vim-capslock" },
+		{ "kchmck/vim-coffee-script" },
+		{ "tpope/vim-commentary" },
+		{ "tommcdo/vim-exchange" },
+		{ "tpope/vim-fugitive" },
+		{ "tpope/vim-git" },
+		{ "jparise/vim-graphql" },
+		{ "lfe-support/vim-lfe" },
+		{ "tpope/vim-obsession" },
+		{ "dbakker/vim-projectroot" },
+		{ "digitaltoad/vim-pug" },
+		{
+			"justinmk/vim-sneak",
+			init = function()
+				vim.g["sneak#label"] = 1
+			end,
+		},
+		{ "tpope/vim-surround" },
+		{ "thinca/vim-textobj-between", dependencies = { "kana/vim-textobj-user" } },
+		{ "nelstrom/vim-textobj-rubyblock", dependencies = { "kana/vim-textobj-user" } },
+		{ "tpope/vim-unimpaired" },
+
+		-- Plug 'kovisoft/paredit', { 'on': [] }
+		-- Plug 'junegunn/rainbow_parentheses.vim'
+	},
+})
 
 -- }}}
 
@@ -354,9 +419,6 @@ vim.opt.inccommand = "split"
 -- }}}
 
 -- shortcut_mappings {{{
-
--- Set space as mapleader
-vim.g.mapleader = " "
 
 vim.cmd("source ~/.vim/visual-at.vim")
 
