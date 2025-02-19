@@ -36,19 +36,15 @@ source_if_present() {
   [ -f "$path_to_source" ] && source "$path_to_source"
 }
 
-export ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY="latest_installed"
 if command -v brew &> /dev/null; then
   brew_prefix=$(brew --prefix)
   if [ -f "${brew_prefix}/share/bash-completion/bash_completion" ]; then
       . "${brew_prefix}/share/bash-completion/bash_completion"
       __git_complete g __git_main
   fi
-
-  brew_prefix_asdf=$(brew --prefix asdf)
-
-  source_if_present "${brew_prefix_asdf}/libexec/asdf.sh"
 fi
 
+export ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY="latest_installed"
 source_if_present "${HOME}/.asdf/asdf.sh"
 source_if_present "${HOME}/.asdf/plugins/java/set-java-home.bash"
 
