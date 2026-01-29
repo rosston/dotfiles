@@ -112,9 +112,6 @@
             (setq magit-completing-read-function 'magit-ido-completing-read
                   magit-status-buffer-switch-function 'switch-to-buffer))
   :ensure t)
-(use-package nlinum
-  :config (global-nlinum-mode t)
-  :ensure t)
 (use-package racket-mode
   :ensure t)
 (use-package rainbow-delimiters
@@ -170,6 +167,7 @@
 (setq fill-column 80)
 (setq scroll-margin 20
       scroll-step 1)
+(global-display-line-numbers-mode 1)
 
 (set-frame-font "Source Code Pro-13" nil t)
 
