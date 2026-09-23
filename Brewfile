@@ -17,10 +17,6 @@ brew "thefuck"
 brew "vim"
 brew "watch"
 
-# Dependencies for clojurescript.csv
-brew "leiningen"
-cask "phantomjs"
-
 # Dependencies for asdf-ruby
 brew "openssl"
 brew "readline"
