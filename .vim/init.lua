@@ -95,7 +95,7 @@ require("lazy").setup({
 		{
 			"lukas-reineke/lsp-format.nvim",
 			config = function()
-				require("lsp-format").setup({ exclude = { "solargraph" } })
+				require("lsp-format").setup({ exclude = { "solargraph" }, sync = true })
 			end,
 		},
 		{ "hrsh7th/nvim-cmp" },
