@@ -100,35 +100,6 @@ require("lazy").setup({
 		},
 		{ "hrsh7th/nvim-cmp" },
 		{ "neovim/nvim-lspconfig" },
-		{
-			"jose-elias-alvarez/null-ls.nvim",
-			dependencies = { "nvim-lua/plenary.nvim" },
-			config = function()
-				local null_ls = require("null-ls")
-				local lsp_format_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-				null_ls.setup({
-					on_attach = require("lsp-format").on_attach,
-					sources = {
-						null_ls.builtins.diagnostics.rubocop.with({
-							command = "bundle",
-							args = vim.list_extend(
-								{ "exec", "rubocop" },
-								null_ls.builtins.diagnostics.rubocop._opts.args
-							),
-						}),
-						null_ls.builtins.formatting.rubocop.with({
-							command = "bundle",
-							args = vim.list_extend(
-								{ "exec", "rubocop" },
-								null_ls.builtins.formatting.rubocop._opts.args
-							),
-						}),
-						null_ls.builtins.formatting.stylua,
-					},
-				})
-			end,
-		},
 
 		-- Everything else
 		{
