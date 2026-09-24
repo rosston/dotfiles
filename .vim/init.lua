@@ -413,7 +413,7 @@ vim.keymap.set({ "n", "v" }, "/", "/\\v")
 -- Don't require the Shift key to form chords to enter ex mode.
 vim.keymap.set("n", ";", ":")
 -- Remap old behavior of ; (repeat last f, F, t, or T command) to <leader>;
-vim.keymap.set("", "<Leader>;", "<Plug>Sneak_;", { remap = true })
+vim.keymap.set("n", "<Leader>;", "<Plug>Sneak_;", { remap = true })
 
 -- Remap j and k to act as expected when used on long, wrapped, lines
 vim.keymap.set("n", "j", "gj")
