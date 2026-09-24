@@ -264,6 +264,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<Leader>mgr", vim.lsp.buf.references, bufopts)
 		vim.keymap.set("n", "<Leader>mrr", vim.lsp.buf.rename, bufopts)
 		vim.keymap.set("n", "<Leader>mTlF", vim.lsp.buf.signature_help, bufopts)
+
+		vim.keymap.set("n", "[r", function()
+			vim.diagnostic.jump({ count = -1, float = true })
+		end, bufopts)
+		vim.keymap.set("n", "]r", function()
+			vim.diagnostic.jump({ count = 1, float = true })
+		end, bufopts)
 	end,
 })
 
