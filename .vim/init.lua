@@ -274,12 +274,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-local servers = { "solargraph", "ts_ls" }
-local lspconfig = require("lspconfig")
+local servers = { "biome", "pyright", "ruff", "solargraph", "stylua3p_ls", "ts_ls" }
 for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup({
+	vim.lsp.config(lsp, {
 		capabilities = capabilities,
 	})
+	vim.lsp.enable(lsp)
 end
 
 -- }}}
