@@ -250,7 +250,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(args)
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		require("lsp-format").on_attach(client)
+		require("lsp-format").on_attach(client, args.buffer)
 
 		-- Keybindings copied from Spacemacs' LSP layer
 		local bufopts = { noremap = true, silent = true, buffer = args.buffer }
