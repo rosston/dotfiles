@@ -99,6 +99,7 @@
 (use-package magit
   :config (progn
             (setq evil-collection-magit-want-horizontal-movement t)
+            (setq evil-collection-magit-use-z-for-folds t)
             (setq git-commit-summary-max-length 50)
             (setq magit-git-environment
                   (append magit-git-environment
