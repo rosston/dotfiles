@@ -106,6 +106,7 @@
                           ; We don't need no stinkin' git hooks
                           (list "HUSKY=0")))
             (add-hook 'git-commit-setup-hook (lambda () (set-fill-column 72)))
+            (use-package magit-ido :ensure t)
             (use-package evil-collection
               :after evil
               :ensure t
