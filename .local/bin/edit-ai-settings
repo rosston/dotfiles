@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -eu
+
+for file in \
+    "$HOME/.claude/settings.json" \
+    "$HOME/.config/opencode/opencode.json" \
+    "$HOME/.config/crush/crush.json" \
+    "$HOME/.cursor/cli-config.json" \
+    ".claude/settings.local.json"
+do
+    if [ -f "$file" ]; then
+        set -- "$@" "$file"
+    fi
+done
+
+if [ "$#" -eq 0 ]; then
+    echo "No AI settings files found" >&2
+    exit 1
+fi
+
+nvim "$@"
