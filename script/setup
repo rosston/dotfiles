@@ -74,13 +74,6 @@ custom_config () {
       if [ ! -d "$tpm_dir" ]; then
         git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
       fi
-
-      # Set up dwm.tmux
-      git clone https://github.com/saysjonathan/dwm.tmux.git /tmp/dwm.tmux
-      cd /tmp/dwm.tmux
-      sudo make
-      cd -
-      rm -rf /tmp/dwm.tmux
       ;;
     .vim)
       # Set up tmp dir
